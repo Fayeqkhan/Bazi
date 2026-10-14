@@ -1,14 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>GOLDEN NUMBER - FAZL KHAN</title>
+    <style>
+        @keyframes bgMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1a1a1a, #2c1a04, #0f172a);
+            background-size: 400% 400%;
+            animation: bgMove 12s ease infinite;
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        #welcomeScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(circle at center, #1e1e1e 0%, #000000 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .welcome-card {
+            background: #111827;
+            padding: 40px 20px;
+            border-radius: 25px;
+            border: 2px solid #fbbf24;
+            width: 85%;
+            max-width: 350px;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.25);
+        }
+        .gold-text {
+            color: #fbbf24;
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+            font-weight: 900;
+        }
+        .login-input {
+            width: 85%;
+            padding: 13px;
+            margin: 12px 0;
+            background: #1f2937;
+            border: 1px solid #d97706;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+        }
+        .enter-btn {
+            background: linear-gradient(90deg, #d97706, #fbbf24);
+            color: #000000;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 25px;
+            width: 90%;
+        }
+        .container {
+            background: linear-gradient(135deg, rgba(28, 25, 23, 0.95), rgba(68, 64, 60, 0.95));
+            padding: 30px;
+            border-radius: 30px;
+            width: 85%;
+            max-width: 420px;
+            margin: 30px auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+            border: 2px solid #fbbf24;
+            direction: rtl;
+            position: relative;
+        }
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            font-size: 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+        }
+        .score-board {
+            font-size: 18px;
+            color: #000000;
+            margin-bottom: 25px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #d97706, #fbbf24);
+            padding: 10px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .football-field {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .ball-btn {
+            background-color: #1c1917;
+            color: #fbbf24;
+            border: 3px solid #d97706;
+            width: 80px;
+            height: 80px;
+            font-size: 22px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+        .next-btn {
+            background: linear-gradient(90deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            font-size: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: none;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="welcomeScreen">
+        <div class="welcome-card">
+            <h1 class="gold-text" style="font-size: 34px; margin: 0;">GOLDEN NUMBER</h1>
+            <h2 style="color: #cbd5e1; font-size: 13px; margin-top: 5px; font-weight: bold;">PREMIUM CLUB BY FAZL KHAN</h2>
+            <div style="width: 40px; height: 2px; background: #fbbf24; margin: 20px auto;"></div>
+            <input type="text" id="loginUser" class="login-input" placeholder="Player Name">
+            <input type="password" id="loginPass" class="login-input" placeholder="Password">
+            <button onclick="handleLogin()" class="enter-btn">ENTER ARENA</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <button onclick="handleLogout()" class="logout-btn">Log Out</button>
+        <h1 class="gold-text" style="font-size: 28px; margin-top: 15px;">⚽ لیگ طلایی فضل خان</h1>
+        <p style="color: #d6d3d1; font-size: 14px;">عدد شانس بزرگ درون یکی از توپ‌های سیاه پنهان است. شوت بزن!</p>
+        <div class="score-board">🏆 امتیاز فضل خان: <span id="score">۰</span></div>
+        <div class="football-field">
+            <button onclick="checkAnswer(this)" class="ball-btn" id="opt1">--</button>
+            <button onclick="checkAnswer(this)" class="ball-btn" id="opt2">--</button>
+            <button onclick="checkAnswer(this)" class="ball-btn" id="opt3">--</button>
+        </div>
+        <div id="statusMessage" style="color: #fbbf24;">کدام توپ گل طلا می‌شود؟</div>
+        <button onclick="startNewRound()" class="next-btn" id="nextRoundBtn">⚽ شوت به دست جدید</button>
+    </div>
+
     <script>
-        // 🚀 دکمه ورود ۱۰۰٪ تضمینی و فعال
-        function startGame() {
+        window.onload = function() {
+            var savedUser = localStorage.getItem("activePlayer");
             var screen = document.getElementById("welcomeScreen");
-            if (screen) {
-                screen.style.opacity = "0";
-                screen.style.transform = "scale(1.3) rotateX(20deg)";
-                setTimeout(function() {
-                    screen.style.display = "none";
-                }, 500);
+            if (savedUser) {
+                screen.style.display = "none";
             }
+            startNewRound();
+        };
+
+        function handleLogin() {
+            var user = document.getElementById("loginUser").value;
+            var pass = document.getElementById("loginPass").value;
+            var screen = document.getElementById("welcomeScreen");
+            if (user.trim() === "" || pass.trim() === "") {
+                alert("Please enter Name and Password!");
+            } else {
+                localStorage.setItem("activePlayer", user);
+                screen.style.display = "none";
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem("activePlayer");
+            document.getElementById("welcomeScreen").style.display = "flex";
+            document.getElementById("loginUser").value = "";
+            document.getElementById("loginPass").value = "";
         }
 
         var correctAnswer = 0;
@@ -17,32 +203,26 @@
 
         function startNewRound() {
             canPlay = true;
-            var statusBox = document.getElementById("statusMessage");
-            var nextRoundBtn = document.getElementById("nextRoundBtn");
-            if(statusBox) {
-                statusBox.innerHTML = "توپ شانس را انتخاب کن!";
-                statusBox.style.color = "#f59e0b";
-            }
-            if(nextRoundBtn) nextRoundBtn.style.display = "none";
+            document.getElementById("statusMessage").innerHTML = "کدام توپ گل طلا می‌شود؟";
+            document.getElementById("statusMessage").style.color = "#fbbf24";
+            document.getElementById("nextRoundBtn").style.display = "none";
             
             correctAnswer = Math.floor(Math.random() * 100) + 1;
-            
             var wrong1 = correctAnswer + Math.floor(Math.random() * 10) + 2;
             var wrong2 = correctAnswer - Math.floor(Math.random() * 10) - 2;
             if(wrong2 < 1) wrong2 = correctAnswer + 12;
 
             var options = [correctAnswer, wrong1, wrong2];
-            options.sort(function() { return Math.random() - 0.5; });
+            options.sort(() => Math.random() - 0.5);
 
             for (let i = 1; i <= 3; i++) {
                 var btn = document.getElementById("opt" + i);
                 if(btn) {
                     btn.innerHTML = options[i-1];
                     btn.value = options[i-1];
-                    btn.style.backgroundColor = "#ffffff";
-                    btn.style.color = "#0f172a";
-                    btn.style.borderColor = "#38bdf8";
-                    btn.style.boxShadow = "0 8px 20px rgba(0, 0, 0, 0.4), inset 0 -6px 12px rgba(0,0,0,0.3)";
+                    btn.style.backgroundColor = "#1c1917";
+                    btn.style.color = "#fbbf24";
+                    btn.style.borderColor = "#d97706";
                 }
             }
         }
@@ -50,45 +230,30 @@
         function checkAnswer(selectedButton) {
             if (!canPlay) return;
             canPlay = false;
-
             var userChoice = selectedButton.value;
             var messageBox = document.getElementById("statusMessage");
             var nextBtn = document.getElementById("nextRoundBtn");
 
             if (userChoice == correctAnswer) {
                 selectedButton.style.backgroundColor = "#10b981";
-                selectedButton.style.borderColor = "#10b981";
                 selectedButton.style.color = "white";
-                selectedButton.style.boxShadow = "0 0 25px #10b981, inset 0 -6px 12px rgba(0,0,0,0.2)";
                 score += 10;
-                var scoreBox = document.getElementById("score");
-                if(scoreBox) scoreBox.innerHTML = score;
-                if(messageBox) {
-                    messageBox.style.color = "#10b981";
-                    messageBox.innerHTML = "🎯 فوق‌العاده بود فضل خان! شوتت گل شد (+۱۰ امتیاز)";
-                }
+                document.getElementById("score").innerHTML = score;
+                messageBox.innerHTML = "🎯 گلللللل! عالی بود فضل خان! (+۱۰ امتیاز)";
             } else {
                 selectedButton.style.backgroundColor = "#ef4444";
-                selectedButton.style.borderColor = "#ef4444";
                 selectedButton.style.color = "white";
-                selectedButton.style.boxShadow = "0 0 25px #ef4444, inset 0 -6px 12px rgba(0,0,0,0.2)";
-                if(messageBox) {
-                    messageBox.style.color = "#ef4444";
-                    messageBox.innerHTML = "❌ خطای شوت! توپ برنده عدد " + correctAnswer + " بود.";
-                }
-                
+                messageBox.innerHTML = "❌ اوت شد! توپ برنده عدد " + correctAnswer + " بود.";
                 for (let i = 1; i <= 3; i++) {
                     var btn = document.getElementById("opt" + i);
                     if(btn && btn.value == correctAnswer) {
                         btn.style.backgroundColor = "#10b981";
-                        btn.style.borderColor = "#10b981";
                         btn.style.color = "white";
-                        btn.style.boxShadow = "0 0 20px #10b981";
                     }
                 }
             }
-            if(nextBtn) nextBtn.style.display = "block";
+            nextBtn.style.display = "block";
         }
-
-        startNewRound();
     </script>
+</body>
+</html>
