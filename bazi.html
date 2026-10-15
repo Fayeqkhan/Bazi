@@ -75,8 +75,7 @@ function handleLogout(){
     document.getElementById('authPanel').classList.remove('hidden');
     document.getElementById('gamePanel').classList.add('hidden');
 }
-function sendScore(s){if(!sheetDbUrl||!sheetDbUrl.includes('http'))return;var today=new Date().toLocaleDateString('fa-IR');var pId="PL-"+Math.floor(100000+Math.random()*900000);fetch(sheetDbUrl,{method:'POST',headers:'Content-Type':'application/json'},body:JSON.stringify({data:[{"Player ID":pId,"Username":player||"Unknown","Email":(player||"test")+"@game.com","Total Score":s,"Level":Math.floor(s/50)+1,"Join Date":today,"Last Played":today}]})});}
-
+function sendScore(s){if(!sheetDbUrl||!sheetDbUrl.includes('http'))return;var today=new Date().toLocaleDateString('fa-IR');var pId="PL-"+Math.floor(100000+Math.random()*900000);fetch(sheetDbUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:[{"Player ID":pId,"Username":player||"Unknown","Email":(player||"test")+"@game.com","Total Score":s,"Level":Math.floor(s/50)+1,"Join Date":today,"Last Played":today}]})});}
 
 function startNewRound(){
     canPlay = true;
