@@ -141,6 +141,7 @@ body.reduce-motion *,body.reduce-motion *:before,body.reduce-motion *:after{anim
 'use strict';
 const $ = id => document.getElementById(id);
 const KEY = 'goldenNumberV2';
+const SHEETS_API_URL = 'https://script.google.com/macros/s/AKfycbwq1dO7zOVQ08cI3RIbuEIZbhYJ6VrVfV3_LQL47_Um8q9t8eEwYSYh2iRpCX9zNlyF/exec';
 let player = null, score = 0, round = 1, answer = null, playable = false;
 let currentOptions = [];
 const SETTINGS_KEY = 'goldenNumberSettingsV1';
@@ -234,6 +235,21 @@ function saveProgress(){
   d.records.sort((a,b)=>b.score-a.score);
   d.records=d.records.slice(0,10);
   saveData(d); updateStats();
+  // Send only public game progress to Google Sheets; never send the password.
+  try {
+    fetch(SHEETS_API_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        playerId: player,
+        username: player,
+        email: player,
+        score: score,
+        level: round
+      })
+    }).catch(() => {});
+  } catch (e) {}
 }
 function newRound(){
   playable=true; answer=null;
