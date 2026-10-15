@@ -1,2 +1,224 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b1020"><title>GOLDEN NUMBER — Fazl Khan</title><style>:root{--gold:#ffd166;--gold2:#f59e0b;--bg:#080d1b;--panel:#111a2d;--line:#35415a;--green:#22c55e;--red:#ef4444}*{box-sizing:border-box}body{margin:0;min-height:100vh;color:#f8fafc;font-family:Tahoma,sans-serif;background:radial-gradient(ellipse at top,#1d2b45 0,#0b1020 48%,#060912 100%);background-attachment:fixed}button,input{font:inherit}button{cursor:pointer}.wrap{width:min(960px,94%);margin:auto;padding:22px 0 42px}header{text-align:center;padding:20px 8px}.logo{font-size:clamp(28px,6vw,48px);font-weight:900;color:var(--gold);text-shadow:0 0 22px #f59e0b55}.sub{color:#b9c4d9;margin-top:8px}.panel{background:linear-gradient(145deg,#151f34ee,#0e1628ee);border:1px solid var(--line);border-radius:22px;padding:clamp(16px,4vw,28px);box-shadow:0 18px 55px #0006;margin:16px auto}.hidden{display:none!important}.auth{max-width:460px;margin:12px auto}h2{margin:0 0 14px;color:var(--gold)}.field{display:block;width:100%;padding:13px 14px;margin:10px 0;border-radius:12px;border:1px solid #45516b;background:#080f1f;color:white}.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:800;transition:transform .15s}.btn:active{transform:scale(.98)}.primary{background:linear-gradient(100deg,#f59e0b,#ffe08a);color:#241400}.secondary{background:#263550;color:#fff;border:1px solid #4b5a75}.danger{background:#7f1d1d;color:white}.small{font-size:12px;color:#a9b6cd;line-height:1.8}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tab{background:#17233a;color:#dbeafe;border:1px solid #3c4b67;border-radius:10px;padding:9px 13px}.tab.active{background:#fbbf24;color:#1c1917;border-color:#fbbf24;font-weight:bold}.topline{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.stat{background:#0a1223;border:1px solid #2d3b55;border-radius:14px;padding:13px 8px;text-align:center}.stat strong{display:block;color:var(--gold);font-size:23px;margin-top:6px}.field-area{background:linear-gradient(#123a2d,#0b251f);border:2px solid #27634c;border-radius:18px;padding:22px 12px;margin:18px 0;position:relative;overflow:hidden}.field-area:before{content:"";position:absolute;inset:12px;border:1px solid #ffffff24;border-radius:12px;pointer-events:none}.balls{display:flex;justify-content:center;gap:clamp(8px,3vw,22px);flex-wrap:wrap}.ball{width:clamp(76px,20vw,112px);height:clamp(76px,20vw,112px);border-radius:50%;border:3px solid #fbbf24;background:radial-gradient(circle at 30% 25%,#46516a,#111827 60%);color:var(--gold);font-size:25px;font-weight:900;box-shadow:0 8px 18px #0008,inset 0 0 18px #0008;transition:transform .2s}.ball:hover{transform:translateY(-5px)}.ball.correct{background:linear-gradient(135deg,#16a34a,#064e3b);border-color:#86efac;color:white}.ball.wrong{background:linear-gradient(135deg,#dc2626,#7f1d1d);border-color:#fca5a5;color:white}#message{min-height:32px;font-weight:bold;color:var(--gold);line-height:1.8}.actions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:14px}footer{text-align:center;color:#8290aa;font-size:12px;margin-top:22px}</style></head><body><div class="wrap"><header><div class="logo">GOLDEN NUMBER</div><div class="sub">PREMIUM CLUB · BY FAZL KHAN</div></header><section id="authPanel" class="panel auth"><h2>ورود بازیکن</h2><p class="small">اطلاعات شما به صورت واقعی در دیتابیس فضل خان ذخیره می‌شود.</p><input id="username" class="field" placeholder="نام بازیکن"><input id="email" class="field" type="email" placeholder="ایمیل بازیکن (فقط برای ثبت‌نام)"><input id="password" class="field" type="password" placeholder="رمز عبور"><div class="actions"><button class="btn primary" onclick="handleLogin()">ورود به میدان</button><button class="btn secondary" onclick="handleSignUp()">ثبت‌نام بازیکن جدید</button></div></section><section id="gamePanel" class="panel hidden"><div class="topline"><div id="welcomeMsg">سلام 👋</div><button class="btn danger" onclick="handleLogout()">خروج</button></div><div class="tabs" style="margin-top:15px;"><button class="tab active">🎮 بازی</button><button class="tab" onclick="alert('به زودی!')">🏆 رکوردها</button><button class="tab" onclick="alert('عدد درست را پیدا کن!')">ℹ️ راهنما</button></div><div class="topline" style="margin:15px 0;"><div style="color:var(--gold);font-weight:bold;font-size:18px;">⚽ لیگ طلایی</div><div><span>سطح: </span><select style="background:#17233a;color:white;padding:5px;border-radius:8px;"><option>معمولی</option><option>متوسط</option><option>حرفه‌ای</option></select></div></div><div class="stats"><div class="stat">امتیاز<strong id="scoreVal">0</strong></div><div class="stat">مرحله<strong id="roundVal">1</strong></div><div class="stat">بهترین رکورد<strong id="highScoreVal">0</strong></div></div><div class="field-area"><div class="balls"><button class="ball" id="opt1" onclick="checkAnswer(this)">--</button><button class="ball" id="opt2" onclick="checkAnswer(this)">--</button><button class="ball" id="opt3" onclick="checkAnswer(this)">--</button></div></div><div id="message">کدام توپ عدد طلایی را پنهان کرده است؟</div><div class="actions"><button class="btn primary" onclick="startNewRound()">شروع دوباره</button></div></section><footer>GOLDEN NUMBER · نسخه پایگاه داده آنلاین فضل خان</footer></div><script>var sheetDbUrl='https://sheetdb.io correctAnswer=0,score=0,round=1,highScore=0,canPlay=true;window.onload=function(){var s=localStorage.getItem("currentActiveUser");if(s){document.getElementById("authPanel").classList.add("hidden");document.getElementById("gamePanel").classList.remove("hidden");document.getElementById("welcomeMsg").innerHTML="سلام، "+s+" 👋"}startNewRound()};function sendToGoogleSheet(d){if(!sheetDbUrl.includes('http'))return;fetch(sheetDbUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:[{"Player ID":d.player_id,"Username":d.username,"Email":d.email,"Total Score":d.total_score,"Level":d.level,"Join Date":d.join_date,"Last Played":d.last_played}]})})}function handleSignUp(){var u=document.getElementById("username").value.trim(),e=document.getElementById("email").value.trim(),p=document.getElementById("password").value.trim();if(!u||!e||!p){alert("لطفاً تمام کادرها را پر کنید!");return}if(localStorage.getItem("user_"+u)){alert("این نام کاربری قبلاً ثبت شده است!");return}var pId="PL-"+Math.floor(100000+Math.random()*900000),today=new Date().toLocaleDateString('fa-IR');var acc={player_id:pId,username:u,email:e,password:p,total_score:0,level:1,join_date:today,last_played:today};localStorage.setItem("user_"+u,JSON.stringify(acc));sendToGoogleSheet(acc);alert("🎉 حساب با موفقیت ایجاد شد! حالا دکمه ورود را بزنید.")}function handleLogin(){var u=document.getElementById("username").value.trim(),p=document.getElementById("password").value.trim();var dStr=localStorage.getItem("user_"+u);if(!dStr){alert("❌ نام کاربری یافت نشد!");return}if(JSON.parse(dStr).password!==p){alert("❌ رمز اشتباه است!")}else{localStorage.setItem("currentActiveUser",u);document.getElementById("authPanel").classList.add("hidden");document.getElementById("gamePanel").classList.remove("hidden");document.getElementById("welcomeMsg").innerHTML="سلام، "+u+" 👋"}}function handleLogout(){localStorage.removeItem("currentActiveUser");document.getElementById("authPanel").classList.remove("hidden");document.getElementById("gamePanel").classList.add("hidden")}function startNewRound(){canPlay=true;document.getElementById("message").innerHTML="کدام توپ عدد طلایی را پنهان کرده است؟";document.getElementById("roundVal").innerHTML=round;correctAnswer=Math.floor(Math.random()*100)+1;var w1=correctAnswer+5,w2=correctAnswer-5;if(w2<1)w2=correctAnswer+12;var opts=[correctAnswer,w1,w2].sort(()=>Math.random()-0.5);for(let i=1;i<=3;i++){var btn=document.getElementById("opt"+i);if(btn){btn.innerHTML=opts[i-1];btn.value=opts[i-1];btn.className="ball"}}}function checkAnswer(b){if(!canPlay)return;canPlay=false;if(b.value==correctAnswer){b.classList.add("correct");score+=10;round+=1;if(score>highScore){highScore=score;document.getElementById("highScoreVal").innerHTML=highScore}document.getElementById("scoreVal").innerHTML=score;document.getElementById("message").innerHTML="🎯 گلللللل! عدد طلایی را پیدا کردی. دست بعدی!"}else{b.classList.add("wrong");score=0;round=1;document.getElementById("scoreVal").innerHTML=score;document.getElementById("message").innerHTML="❌ اوت شد! عدد طلایی "+correctAnswer+" بود.";for(let i=1;i<=3;i++){var btn=document.getElementById("opt"+i);if(btn&&btn.value==correctAnswer){btn.classList.add("correct")}}}}</script></body></html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1020">
+<title>GOLDEN NUMBER — Fazl Khan</title>
+<style>
+:root{--gold:#ffd166;--gold2:#f59e0b;--bg:#080d1b;--panel:#111a2d;--line:#35415a;--green:#22c55e;--red:#ef4444}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:#f8fafc;font-family:Tahoma,Arial,sans-serif;background:radial-gradient(ellipse at top,#1d2b45 0,#0b1020 48%,#060912 100%);background-attachment:fixed}
+button,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.wrap{width:min(960px,94%);margin:auto;padding:22px 0 42px}
+header{text-align:center;padding:20px 8px}
+.logo{font-size:clamp(28px,6vw,48px);font-weight:900;letter-spacing:1px;color:var(--gold);text-shadow:0 0 22px #f59e0b55}
+.sub{color:#b9c4d9;margin-top:8px}
+.panel{background:linear-gradient(145deg,#151f34ee,#0e1628ee);border:1px solid var(--line);border-radius:22px;padding:clamp(16px,4vw,28px);box-shadow:0 18px 55px #0006;margin:16px auto}
+.hidden{display:none!important}
+.auth{max-width:460px;margin:12px auto}
+h2{margin:0 0 14px;color:var(--gold)}
+.field{display:block;width:100%;padding:13px 14px;margin:10px 0;border-radius:12px;border:1px solid #45516b;background:#080f1f;color:white}
+.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:800;transition:transform .15s,filter .15s}
+.btn:active{transform:scale(.98)}
+.primary{background:linear-gradient(100deg,#f59e0b,#ffe08a);color:#241400}
+.secondary{background:#263550;color:#fff;border:1px solid #4b5a75}
+.danger{background:#7f1d1d;color:white}
+.success{background:#14532d;color:#fff}
+.small{font-size:12px;color:#a9b6cd;line-height:1.8}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab{background:#17233a;color:#dbeafe;border:1px solid #3c4b67;border-radius:10px;padding:9px 13px}
+.tab.active{background:#fbbf24;color:#1c1917;border-color:#fbbf24;font-weight:bold}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.stat{background:#0a1223;border:1px solid #2d3b55;border-radius:14px;padding:13px 8px;text-align:center}
+.stat strong{display:block;color:var(--gold);font-size:23px;margin-top:6px}
+.field-area{background:linear-gradient(#123a2d,#0b251f);border:2px solid #27634c;border-radius:18px;padding:22px 12px;margin:18px 0;position:relative;overflow:hidden}
+.field-area:before{content:"";position:absolute;inset:12px;border:1px solid #ffffff24;border-radius:12px;pointer-events:none}
+.balls{display:flex;justify-content:center;gap:clamp(8px,3vw,22px);flex-wrap:wrap;position:relative}
+.ball{width:clamp(76px,20vw,112px);height:clamp(76px,20vw,112px);border-radius:50%;border:3px solid #fbbf24;background:radial-gradient(circle at 30% 25%,#46516a,#111827 60%);color:var(--gold);font-size:25px;font-weight:900;box-shadow:0 8px 18px #0008,inset 0 0 18px #0008;transition:transform .2s,box-shadow .2s}
+.ball:hover{transform:translateY(-5px);box-shadow:0 12px 25px #0009,0 0 16px #fbbf2440}
+.ball.correct{background:linear-gradient(135deg,#16a34a,#064e3b);border-color:#86efac;color:white;animation:pop .35s}
+.ball.wrong{background:linear-gradient(135deg,#dc2626,#7f1d1d);border-color:#fca5a5;color:white;animation:shake .25s}
+@keyframes pop{50%{transform:scale(1.12)}}@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+#message{min-height:32px;font-weight:bold;color:var(--gold);line-height:1.8}
+.actions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{text-align:center;padding:11px 6px;border-bottom:1px solid #2b3850}
+th{color:var(--gold)}
+footer{text-align:center;color:#8290aa;font-size:12px;margin-top:22px}
+.notice{padding:12px 14px;border-radius:12px;background:#42200666;border:1px solid #92400e;color:#fde68a;line-height:1.9;font-size:13px}
+@media(max-width:520px){.stats{gap:6px}.stat{font-size:12px;padding:10px 4px}.stat strong{font-size:19px}.panel{border-radius:17px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo">GOLDEN NUMBER</div><div class="sub">PREMIUM CLUB · BY FAZL KHAN</div></header>
+
+<section id="authPanel" class="panel auth">
+  <h2 id="authTitle">ورود بازیکن</h2>
+  <p class="small">نام بازیکن را وارد کن. این نسخه برای آزمایش در همین مرورگر است.</p>
+  <input id="username" class="field" maxlength="20" autocomplete="nickname" placeholder="نام بازیکن">
+  <input id="password" class="field" type="password" maxlength="80" autocomplete="current-password" placeholder="رمز (فقط برای نمایش فرم)">
+  <div class="actions"><button class="btn primary" id="loginBtn">ورود به میدان</button><button class="btn secondary" id="registerBtn">ساخت پروفایل محلی</button></div>
+  <p class="small">مهم: چون GitHub Pages فقط میزبانی ایستا است، این فرم ورود واقعی و امن نیست. رمز در این نسخه ذخیره یا اعتبارسنجی نمی‌شود.</p>
+</section>
+
+<main id="gamePanel" class="panel hidden">
+  <div class="topline"><div>سلام، <strong id="playerName" style="color:var(--gold)"></strong> 👋</div><button class="btn secondary" id="logoutBtn">خروج</button></div>
+  <div class="tabs" style="margin-top:18px">
+    <button class="tab active" data-tab="play">🎮 بازی</button><button class="tab" data-tab="leaderboard">🏆 رکوردها</button><button class="tab" data-tab="help">ℹ️ راهنما</button>
+  </div>
+  <section id="playTab">
+    <div class="topline"><h2>⚽ لیگ طلایی</h2><label>سطح:
+      <select id="difficulty" class="field" style="display:inline-block;width:auto;margin:0;padding:8px">
+        <option value="easy">آسان</option><option value="normal" selected>معمولی</option><option value="hard">سخت</option>
+      </select></label></div>
+    <p class="small">یکی از سه توپ را انتخاب کن. عدد طلایی را پیدا کن و امتیاز بگیر!</p>
+    <div class="stats">
+      <div class="stat">امتیاز<strong id="score">۰</strong></div>
+      <div class="stat">مرحله<strong id="level">۱</strong></div>
+      <div class="stat">بهترین رکورد<strong id="best">۰</strong></div>
+    </div>
+    <div class="field-area"><div class="balls">
+      <button class="ball" id="ball0" aria-label="توپ اول">⚽</button><button class="ball" id="ball1" aria-label="توپ دوم">⚽</button><button class="ball" id="ball2" aria-label="توپ سوم">⚽</button>
+    </div></div>
+    <div id="message" role="status" aria-live="polite">آماده‌ای؟ یک توپ را انتخاب کن.</div>
+    <div class="actions"><button class="btn primary hidden" id="nextBtn">مرحله بعدی ←</button><button class="btn secondary" id="resetBtn">شروع دوباره</button></div>
+  </section>
+  <section id="leaderboardTab" class="hidden"><h2>🏆 رکوردهای همین دستگاه</h2><p class="small">این جدول فقط در همین مرورگر ذخیره می‌شود و جدول جهانی نیست.</p><div id="records"></div><div class="actions"><button id="clearRecords" class="btn danger">پاک‌کردن رکوردهای محلی</button></div></section>
+  <section id="helpTab" class="hidden"><h2>راهنمای بازی</h2><p>• با انتخاب توپ درست، ۱۰ امتیاز می‌گیری.</p><p>• هر مرحله عددهای بزرگ‌تری دارد.</p><p>• در سطح سخت، برای جواب درست امتیاز بیشتری می‌گیری اما انتخاب‌ها دشوارتر می‌شوند.</p><div class="notice">حساب، امتیاز و رکوردها در حافظه همین مرورگر هستند. پاک‌کردن داده‌های مرورگر یا عوض‌کردن دستگاه ممکن است آن‌ها را حذف کند. برای حساب امن و جدول جهانی به سرویس پشتیبان نیاز است.</div></section>
+</main>
+<footer>GOLDEN NUMBER · نسخه آزمایشی محلی</footer>
+</div>
+<script>
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const KEY = 'goldenNumberV2';
+let player = null, score = 0, round = 1, answer = null, playable = false;
+let currentOptions = [];
+
+function readData(){
+  try { return JSON.parse(localStorage.getItem(KEY)) || {players:{},records:[]}; }
+  catch(e){ return {players:{},records:[]}; }
+}
+function saveData(data){ try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e){} }
+function fa(n){ return Number(n).toLocaleString('fa-IR'); }
+function showGame(name){
+  player = name;
+  $('playerName').textContent = name;
+  $('authPanel').classList.add('hidden');
+  $('gamePanel').classList.remove('hidden');
+  const d = readData();
+  score = Number(d.players[name]?.score || 0);
+  round = Number(d.players[name]?.round || 1);
+  updateStats();
+  newRound();
+}
+function updateStats(){
+  const d=readData(), rec=d.records.find(x=>x.name===player);
+  $('score').textContent=fa(score);
+  $('level').textContent=fa(round);
+  $('best').textContent=fa(Math.max(score, Number(rec?.score||0)));
+}
+function login(create){
+  const name=$('username').value.trim();
+  const pass=$('password').value;
+  if(!name){alert('لطفاً نام بازیکن را وارد کن.');return;}
+  if(!pass){alert('لطفاً یک رمز برای فرم وارد کن.');return;}
+  const d=readData();
+  if(create){
+    if(d.players[name]){alert('این نام در این مرورگر وجود دارد؛ وارد شو.');return;}
+    d.players[name]={score:0,round:1};
+    saveData(d);
+  } else if(!d.players[name]){
+    // Guest/local profile only; no password verification is performed.
+    d.players[name]={score:0,round:1};
+    saveData(d);
+  }
+  localStorage.setItem('goldenNumberActive',name);
+  showGame(name);
+}
+function saveProgress(){
+  const d=readData();
+  d.players[player]={score,round};
+  const old=d.records.find(x=>x.name===player);
+  if(old) old.score=Math.max(old.score,score);
+  else d.records.push({name:player,score});
+  d.records.sort((a,b)=>b.score-a.score);
+  d.records=d.records.slice(0,10);
+  saveData(d); updateStats();
+}
+function newRound(){
+  playable=true; answer=null;
+  $('message').textContent='کدام توپ عدد طلایی را پنهان کرده است؟';
+  $('message').style.color='var(--gold)';
+  $('nextBtn').classList.add('hidden');
+  const mode=$('difficulty').value;
+  const max=mode==='easy'?20:mode==='hard'?200+round*10:100+round*5;
+  answer=1+Math.floor(Math.random()*max);
+  const spread=mode==='easy'?6:mode==='hard'?35:15;
+  const vals=new Set([answer]);
+  while(vals.size<3){
+    let v=answer+Math.floor(Math.random()*(spread*2+1))-spread;
+    if(v<1)v=1+Math.floor(Math.random()*max);
+    if(v!==answer) vals.add(v);
+  }
+  currentOptions=[...vals];
+  for(let i=0;i<3;i++){
+    const b=$('ball'+i); b.textContent=fa(currentOptions[i]); b.className='ball'; b.disabled=false;
+  }
+}
+function choose(i){
+  if(!playable)return;
+  playable=false;
+  const mode=$('difficulty').value;
+  for(let j=0;j<3;j++){
+    const b=$('ball'+j); b.disabled=true;
+    if(currentOptions[j]===answer){b.classList.add('correct');b.textContent='✓ '+fa(answer);}
+  }
+  if(currentOptions[i]===answer){
+    const points=mode==='easy'?10:mode==='hard'?25:15;
+    score+=points; round++;
+    $('message').textContent='🎉 آفرین! درست انتخاب کردی. +'+fa(points)+' امتیاز';
+    $('message').style.color='var(--gold)';
+  } else {
+    $('ball'+i).classList.add('wrong');
+    $('message').textContent='این بار نه! عدد طلایی '+fa(answer)+' بود.';
+    $('message').style.color='#fca5a5';
+  }
+  saveProgress();
+  $('nextBtn').classList.remove('hidden');
+}
+function setTab(tab){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  ['play','leaderboard','help'].forEach(t=>$(t+'Tab').classList.toggle('hidden',t!==tab));
+  if(tab==='leaderboard') renderRecords();
+}
+function renderRecords(){
+  const d=readData();
+  if(!d.records.length){$('records').innerHTML='<p class="small">هنوز رکوردی ثبت نشده است.</p>';return;}
+  const rows=d.records.map((r,i)=>`<tr><td>${fa(i+1)}</td><td>${escapeHTML(r.name)}</td><td>${fa(r.score)}</td></tr>`).join('');
+  $('records').innerHTML=`<table><thead><tr><th>رتبه</th><th>بازیکن</th><th>رکورد</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+$('loginBtn').addEventListener('click',()=>login(false));
+$('registerBtn').addEventListener('click',()=>login(true));
+$('password').addEventListener('keydown',e=>{if(e.key==='Enter')login(false);});
+for(let i=0;i<3;i++)$('ball'+i).addEventListener('click',()=>choose(i));
+$('nextBtn').addEventListener('click',newRound);
+$('resetBtn').addEventListener('click',()=>{if(confirm('امتیاز این بازی از صفر شروع شود؟')){score=0;round=1;saveProgress();newRound();}});
+$('difficulty').addEventListener('change',newRound);
+$('logoutBtn').addEventListener('click',()=>{localStorage.removeItem('goldenNumberActive');player=null;$('gamePanel').classList.add('hidden');$('authPanel').classList.remove('hidden');$('password').value='';});
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
+$('clearRecords').addEventListener('click',()=>{if(confirm('تمام رکوردهای محلی پاک شود؟')){const d=readData();d.records=[];saveData(d);renderRecords();updateStats();}});
+const saved=localStorage.getItem('goldenNumberActive');
+if(saved && readData().players[saved]) showGame(saved);
+})();
+</script>
+</body>
+</html>
