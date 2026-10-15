@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOLDEN NUMBER — Fazl Khan</title>
+    <title>GOLDEN NUMBER</title>
     <style>
         :root {
             --gold: #ffd166;
@@ -16,94 +16,78 @@
         }
         * { box-sizing: border-box; }
         body {
-            margin: 0;
-            min-height: 100vh;
-            color: #f8fafc;
-            font-family: Tahoma, sans-serif;
+            margin: 0; min-height: 100vh; color: #f8fafc; font-family: Tahoma, sans-serif;
             background: radial-gradient(ellipse at top, #1d2b45 0, #0b1020 48%, #060912 100%);
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
+            background-attachment: fixed; display: flex; align-items: center; justify-content: center; padding: 15px;
         }
         .hidden { display: none !important; }
+        
+        /* 🚪 ظاهر دقیق ورودی عکس اول شما */
         .auth-container {
             background: linear-gradient(145deg, #151f34ee, #0e1628ee);
-            border: 2px solid #fbbf24;
-            border-radius: 28px;
-            padding: 35px 20px;
-            width: 92%;
-            max-width: 410px;
-            text-align: center;
-            box-shadow: 0 18px 55px rgba(0,0,0,0.6);
+            border: 2px solid #fbbf24; border-radius: 28px; padding: 35px 22px;
+            width: 100%; max-width: 410px; text-align: center; box-shadow: 0 18px 55px #0006;
         }
-        .logo-gold {
-            font-size: 34px;
-            font-weight: 900;
-            color: #fbbf24;
-            text-shadow: 0 0 25px rgba(251, 191, 36, 0.7);
-        }
-        .sub-title {
-            color: #b9c4d9;
-            font-size: 11px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
+        .logo-gold { font-size: 34px; font-weight: 900; color: #fbbf24; text-shadow: 0 0 25px rgba(251, 191, 36, 0.7); }
+        .sub-title { color: #b9c4d9; font-size: 11px; font-weight: bold; margin-bottom: 20px; }
         .promo-zone {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(251, 191, 36, 0.06);
-            border: 1px dashed #fbbf24;
-            border-radius: 18px;
-            padding: 12px;
-            margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(251, 191, 36, 0.06); border: 1px dashed #fbbf24; border-radius: 18px; padding: 12px; margin-bottom: 20px;
         }
         .promo-balls { display: flex; flex-direction: column; gap: 6px; }
         .mini-ball {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 2px solid #fbbf24;
-            background: radial-gradient(circle, #46516a, #111827);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fbbf24;
-            font-weight: bold;
+            width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fbbf24;
+            background: radial-gradient(circle, #46516a, #111827); display: flex; align-items: center; justify-content: center; color: #fbbf24; font-weight: bold;
         }
         .promo-coin-box { display: flex; flex-direction: column; align-items: center; gap: 4px; }
         .gold-coin {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #fbbf24, #d97706);
-            border: 2px solid #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            box-shadow: 0 0 15px #fbbf24;
+            width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #fbbf24, #d97706);
+            border: 2px solid #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 0 15px #fbbf24;
         }
         .coin-text { color: #fbbf24; font-size: 12px; font-weight: 900; }
         h2 { font-size: 20px; color: #fbbf24; margin: 10px 0; }
         .small { font-size: 12px; color: #a9b6cd; margin-bottom: 15px; }
         .input-field {
-            width: 100%;
-            padding: 13px 14px;
-            margin: 9px 0;
-            border-radius: 12px;
-            border: 1px solid #45516b;
-            background: #080f1f;
-            color: #fff;
-            text-align: center;
-            outline: none;
+            width: 100%; padding: 14px 16px; margin: 10px 0; border-radius: 12px;
+            border: 1px solid #45516b; background: #080f1f; color: #fff; text-align: center; outline: none; font-size: 15px;
         }
+        .btn-group { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; width: 100%; }
+        .btn { width: 100%; padding: 14px; font-size: 16px; font-weight: 800; border-radius: 12px; border: none; cursor: pointer; transition: transform 0.15s; }
+        .btn:active { transform: scale(0.98); }
+        .btn-primary { background: linear-gradient(100deg, #f59e0b, #ffe08a); color: #241400; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3); }
+        .btn-secondary { background: #263550; color: #fff; border: 1px solid #4b5a75; }
+        .btn-danger { background: #7f1d1d; color: #fff; border: none; }
+
+        /* 🎮 ظاهر دقیق زمین بازی داخلی عکس دوم شما */
+        .game-panel {
+            background: linear-gradient(145deg, #151f34ee, #0e1628ee); border: 1px solid var(--line);
+            border-radius: 22px; padding: 25px 20px; width: 100%; max-width: 440px; margin: 0 auto; box-shadow: 0 18px 55px #0006;
+        }
+        .topline { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; width: 100%; }
+        .tabs { display: flex; gap: 8px; margin-bottom: 16px; width: 100%; }
+        .tab { background: #17233a; color: #dbeafe; border: 1px solid #3c4b67; border-radius: 10px; padding: 9px 13px; flex: 1; text-align: center; font-size: 13px; }
+        .tab.active { background: #fbbf24; color: #1c1917; font-weight: bold; border-color: #fbbf24; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; width: 100%; }
+        .stat { background: #0a1223; border: 1px solid #2d3b55; border-radius: 14px; padding: 13px 8px; text-align: center; color: #8290aa; font-size: 13px; }
+        .stat strong { display: block; color: var(--gold); font-size: 23px; margin-top: 6px; }
+        
+        /* زمین سرسبز چمنی چالش */
+        .field-area { background: linear-gradient(#123a2d, #0b251f); border: 2px solid #27634c; border-radius: 18px; padding: 25px 12px; margin: 18px 0; position: relative; width: 100%; }
+        .balls { display: flex; justify-content: center; gap: 15px; width: 100%; }
+        .ball {
+            width: 95px; height: 95px; border-radius: 50%; border: 3px solid #fbbf24;
+            background: radial-gradient(circle, #46516a, #111827); color: var(--gold);
+            font-size: 26px; font-weight: 900; box-shadow: 0 8px 18px #0008; transition: transform 0.2s; cursor: pointer;
+        }
+        .ball:hover { transform: translateY(-5px); }
+        .ball.correct { background: linear-gradient(135deg, #16a34a, #064e3b); color: white; border-color: #86efac; }
+        .ball.wrong { background: linear-gradient(135deg, #dc2626, #7f1d1d); color: white; border-color: #fca5a5; }
+        #message { font-weight: bold; color: var(--gold); font-size: 16px; margin: 15px 0; text-align: center; }
+        footer { text-align: center; color: #8290aa; font-size: 12px; margin-top: 22px; width: 100%; }
     </style>
 </head>
 <body>
-    <!-- 🚪 کادر شیشه‌ای ورود و ثبت‌نام واقعی بازیکن -->
+    <!-- 🚪 پنل ورودی و ثبت‌نام لوکس (دقیقاً مثل عکس اول شما) -->
     <div id="authPanel" class="auth-container">
         <div class="logo-gold">GOLDEN NUMBER</div>
         <div class="sub-title">PREMIUM CLUB · BY FAZL KHAN</div>
@@ -113,7 +97,7 @@
                 <div class="mini-ball">⚽</div>
                 <div class="mini-ball">⚽</div>
             </div>
-            <div style="color:#fff; font-size:13px; font-weight:bold; max-width:140px">یکی از توپ‌ها حاوی عدد طلایی شانس است! شوت بزن...</div>
+            <div style="color:#fff; font-size:13px; font-weight:bold; max-width:140px; line-height: 1.4;">یکی از توپ‌ها حاوی عدد طلایی شانس است! شوت بزن...</div>
             <div class="promo-coin-box">
                 <div class="gold-coin">🪙</div>
                 <div class="coin-text">۱۰۰ سکه برنده شو</div>
@@ -131,7 +115,7 @@
         <footer>GOLDEN NUMBER NETWORK © 2026</footer>
     </div>
 
-    <!-- 🎮 زمین بازی اصلی لوکس به همراه آیکون پروفایل و تنظیمات -->
+    <!-- 🎮 پنل زمین مسابقه داخلی (دقیقاً مثل عکس دوم شما) -->
     <div id="gamePanel" class="game-panel hidden">
         <div class="topline" style="background: rgba(251, 191, 36, 0.05); padding: 10px 14px; border-radius: 15px; border: 1px solid var(--line); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; width: 100%;">
             <div style="display: flex; align-items: center; gap: 10px;">
@@ -141,24 +125,20 @@
             <div style="position: relative;">
                 <button class="btn secondary" style="padding: 6px 12px; font-size: 14px; width: auto; border-radius: 10px; background: #263550; color: #fff; border: 1px solid #4b5a75;" onclick="document.getElementById('settingsMenu').classList.toggle('hidden')">⚙️ تنظیمات</button>
                 <div id="settingsMenu" class="hidden" style="position: absolute; left: 0; top: 40px; background: #111a2d; border: 1px solid var(--line); border-radius: 12px; padding: 8px; width: 120px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 100;">
-                    <button class="btn" style="padding: 8px; font-size: 13px; border-radius: 8px; width: 100%; background: #7f1d1d; color: #fff; border: none;" onclick="handleLogout()">🚪 خروج</button>
+                    <button class="btn btn-danger" style="padding: 8px; font-size: 13px; border-radius: 8px; width: 100%;" onclick="handleLogout()">🚪 خروج</button>
                 </div>
             </div>
         </div>
-        <div class="tabs" style="margin-top:16px">
+        <div class="tabs">
             <button class="tab active">🎮 بازی</button>
             <button class="tab" onclick="alert('به زودی!')">🏆 رکوردها</button>
             <button class="tab" onclick="alert('عدد درست را پیدا کن!')">ℹ️ راهنما</button>
         </div>
         <div class="topline" style="margin:16px 0">
-            <div style="color:var(--gold); font-weight:bold; font-size:18px">⚽ لیگ طلایی</div>
+            <div style="color:var(--gold); font-weight:bold; font-size:17px">⚽ لیگ طلایی</div>
             <div>
                 <span>سطح: </span>
-                <select style="background:#17233a; color:white; padding:5px; border-radius:8px;">
-                    <option>معمولی</option>
-                    <option>متوسط</option>
-                    <option>حرفه‌ای</option>
-                </select>
+                <select style="background:#17233a; color:white; padding:5px; border-radius:8px; border:1px solid var(--line);"><option>معمولی</option><option>متوسط</option><option>حرفه‌ای</option></select>
             </div>
         </div>
         <div class="stats">
@@ -187,17 +167,11 @@ function toggleAuthMode() {
     isSignUpMode = !isSignUpMode;
     var t = document.getElementById('authTitle'), n = document.getElementById('authNotice'), e = document.getElementById('email'), m = document.getElementById('mainBtn'), s = document.getElementById('switchBtn');
     if (isSignUpMode) {
-        t.innerHTML = "ثبت‌نام بازیکن جدید"; 
-        n.innerHTML = "ایمیل خود را وارد کنید تا حساب آنلاین شما فعال شود.";
-        e.classList.remove('hidden'); 
-        m.innerHTML = "ایجاد حساب و عضویت واقعی"; 
-        s.innerHTML = "قبلاً ثبت‌نام کرده‌ام؟ ورود";
+        t.innerHTML = "ثبت‌نام بازیکن جدید"; n.innerHTML = "ایمیل خود را وارد کنید تا حساب آنلاین شما فعال شود.";
+        e.classList.remove('hidden'); m.innerHTML = "ایجاد حساب و عضویت واقعی"; s.innerHTML = "قبلاً ثبت‌نام کرده‌ام؟ ورود";
     } else {
-        t.innerHTML = "ورود بازیکن به میدان"; 
-        n.innerHTML = "نام و رمز خود را وارد کنید.";
-        e.classList.add('hidden'); 
-        m.innerHTML = "ورود به میدان مسابقه"; 
-        s.innerHTML = "ثبت‌نام حساب جدید";
+        t.innerHTML = "ورود بازیکن به میدان"; n.innerHTML = "نام و رمز خود را وارد کنید.";
+        e.classList.add('hidden'); m.innerHTML = "ورود به میدان مسابقه"; s.innerHTML = "ثبت‌نام حساب جدید";
     }
 }
 
@@ -217,28 +191,21 @@ function handleSubmit() {
                 body: JSON.stringify({ data: [acc] })
             });
         }
-        alert("🎉 حساب واقعی ایجاد شد! حالا وارد شوید."); 
-        toggleAuthMode();
+        alert("🎉 حساب واقعی ایجاد شد! حالا وارد شوید."); toggleAuthMode();
     } else {
         var sData = localStorage.getItem("user_" + u);
-        if (!sData) { alert("❌ نام کاربری یافت نشد!"); return; }
+        if (!sData) { alert("❌ نام کاربری یافت نشد! ابتدا ثبت‌نام کنید."); return; }
         var d = JSON.parse(sData);
         if (d.password !== p) { alert("❌ رمز اشتباه است!"); return; }
-        localStorage.setItem("currentActiveUser", u); 
-        showGame(u);
+        localStorage.setItem("currentActiveUser", u); showGame(u);
     }
 }
 
 function showGame(name) {
-    player = name; 
-    document.getElementById('welcomeMsg').innerHTML = "سلام، " + name + " 👋";
-    document.getElementById('authPanel').classList.add('hidden'); 
-    document.getElementById('gamePanel').classList.remove('hidden');
-    var h = localStorage.getItem("high_" + player); 
-    highScore = h ? parseInt(h) : 0;
-    score = 0; round = 1; 
-    renderStats(); 
-    startNewRound();
+    player = name; document.getElementById('welcomeMsg').innerHTML = "سلام، " + name + " 👋";
+    document.getElementById('authPanel').classList.add('hidden'); document.getElementById('gamePanel').classList.remove('hidden');
+    var h = localStorage.getItem("high_" + player); highScore = h ? parseInt(h) : 0;
+    score = 0; round = 1; renderStats(); startNewRound();
 }
 
 function sendScore(s) {
@@ -260,67 +227,42 @@ function renderStats() {
 
 function handleLogout() {
     localStorage.removeItem('currentActiveUser');
-    document.getElementById('authPanel').classList.remove('hidden'); 
-    document.getElementById('gamePanel').classList.add('hidden');
+    document.getElementById('authPanel').classList.remove('hidden'); document.getElementById('gamePanel').classList.add('hidden');
 }
 
 function startNewRound() {
-    canPlay = true; 
-    document.getElementById('message').innerHTML = "کدام توپ عدد طلایی را پنهان کرده است؟";
+    canPlay = true; document.getElementById('message').innerHTML = "کدام توپ عدد طلایی را پنهان کرده است؟";
     document.getElementById('message').style.color = "var(--gold)";
-    for (let i = 1; i <= 3; i++) { 
-        var btn = document.getElementById('opt' + i); 
-        if (btn) btn.className = "ball"; 
-    }
+    for (let i = 1; i <= 3; i++) { var btn = document.getElementById('opt' + i); if (btn) btn.className = "ball"; }
     correctAnswer = Math.floor(Math.random() * 100) + 1;
     var w1 = correctAnswer + Math.floor(Math.random() * 8) + 2, w2 = correctAnswer - Math.floor(Math.random() * 8) - 2;
-    if (w2 < 1) w2 = correctAnswer + 12; 
-    currentOptions = [correctAnswer, w1, w2];
+    if (w2 < 1) w2 = correctAnswer + 12; currentOptions = [correctAnswer, w1, w2];
     for (let i = currentOptions.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        var temp = currentOptions[i]; 
-        currentOptions[i] = currentOptions[j]; 
-        currentOptions[j] = temp;
+        var temp = currentOptions[i]; currentOptions[i] = currentOptions[j]; currentOptions[j] = temp;
     }
     for (let i = 1; i <= 3; i++) {
         var btn = document.getElementById('opt' + i);
-        if (btn) { 
-            btn.innerHTML = Number(currentOptions[i - 1]).toLocaleString('fa-IR'); 
-            btn.value = currentOptions[i - 1]; 
-        }
+        if (btn) { btn.innerHTML = Number(currentOptions[i - 1]).toLocaleString('fa-IR'); btn.value = currentOptions[i - 1]; }
     }
 }
 
 function checkAnswer(b) {
     if (!canPlay) return; canPlay = false;
     if (b.value == correctAnswer) {
-        b.classList.add('correct'); 
-        score += 10; round += 1;
-        if (score > highScore) { 
-            highScore = score; 
-            localStorage.setItem("high_" + player, highScore); 
-        }
-        document.getElementById('message').innerHTML = "🎯 گلللللل! دست بعدی!"; 
-        document.getElementById('message').style.color = "var(--green)";
-        renderStats(); 
-        sendScore(score);
+        b.classList.add('correct'); score += 10; round += 1;
+        if (score > highScore) { highScore = score; localStorage.setItem("high_" + player, highScore); }
+        document.getElementById('message').innerHTML = "🎯 گلللللل! دست بعدی!"; document.getElementById('message').style.color = "var(--green)";
+        renderStats(); sendScore(score);
     } else {
-        b.classList.add('wrong'); 
-        var f = score; score = 0; round = 1;
+        b.classList.add('wrong'); var f = score; score = 0; round = 1;
         document.getElementById('message').innerHTML = "❌ اوت شد! عدد " + Number(correctAnswer).toLocaleString('fa-IR') + " بود.";
         document.getElementById('message').style.color = "var(--red)";
-        for (let i = 1; i <= 3; i++) { 
-            var btn = document.getElementById('opt' + i); 
-            if (btn && btn.value == correctAnswer) btn.classList.add('correct'); 
-        }
-        renderStats(); 
-        sendScore(f);
+        for (let i = 1; i <= 3; i++) { var btn = document.getElementById('opt' + i); if (btn && btn.value == correctAnswer) btn.classList.add('correct'); }
+        renderStats(); sendScore(f);
     }
 }
-window.onload = function() { 
-    var s = localStorage.getItem("currentActiveUser"); 
-    if (s) { showGame(s); } 
-};
+window.onload = function() { var s = localStorage.getItem("currentActiveUser"); if (s) { showGame(s); } };
 </script>
 </body>
 </html>
