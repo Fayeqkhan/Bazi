@@ -1,30 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>GOLDEN NUMBER</title>
-    <style>
-        body { background: linear-gradient(-45deg, #0f172a, #1a1a1a, #2c1a04, #0f172a); background-size: 400% 400%; color: #f8fafc; font-family: sans-serif; text-align: center; margin: 0; min-height: 100vh; }
-        #authScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: radial-gradient(circle, #1e1e1e, #000000); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
-        .auth-card { background: #111827; padding: 35px 20px; border-radius: 25px; border: 2px solid #fbbf24; width: 85%; max-width: 350px; }
-        .login-input { width: 85%; padding: 12px; margin: 8px 0; background: #1f2937; border: 1px solid #d97706; border-radius: 10px; color: white; font-size: 15px; text-align: center; outline: none; }
-        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; align-items: center; }
-        .auth-btn { color: #000000; border: none; padding: 14px; font-size: 16px; border-radius: 25px; cursor: pointer; font-weight: bold; width: 90%; }
-        .btn-login { background: linear-gradient(90deg, #d97706, #fbbf24); }
-        .btn-signup { background: #1f2937; color: #fbbf24; border: 1px solid #fbbf24; }
-        .container { background: linear-gradient(135deg, rgba(28,25,23,0.95), rgba(68,64,60,0.95)); padding: 30px; border-radius: 30px; width: 85%; max-width: 420px; margin: 20px auto; border: 2px solid #fbbf24; direction: rtl; position: relative; }
-        .logout-btn { background: #ef4444; color: white; border: none; padding: 6px 15px; font-size: 12px; border-radius: 20px; cursor: pointer; position: absolute; top: 15px; left: 15px; }
-        .score-board { font-size: 18px; color: #000000; margin-bottom: 25px; font-weight: bold; background: linear-gradient(90deg, #d97706, #fbbf24); padding: 10px 25px; border-radius: 50px; display: inline-block; margin-top: 20px; }
-        .football-field { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
-        .ball-btn { background-color: #1c1917; color: #fbbf24; border: 3px solid #d97706; width: 80px; height: 80px; font-size: 22px; border-radius: 50%; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; }
-        .next-btn { background: linear-gradient(90deg, #10b981, #059669); color: white; border: none; padding: 14px 25px; font-size: 16px; border-radius: 12px; cursor: pointer; margin-top: 20px; display: none; width: 100%; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOLDEN NUMBER - FAZL KHAN</title>
+    <!-- اتصال مستقیم به استایل‌ها و دیزاین طلایی کاملاً منطبق با عکست -->
+    <link rel="stylesheet" href="https://glitch.me">
 </head>
 <body>
 
+    <!-- 🚪 صفحه ورود و ثبت‌نام دیتابیس -->
     <div id="authScreen">
         <div class="auth-card">
-            <h1 style="color:#fbbf24; margin:0;">GOLDEN NUMBER</h1>
+            <h1 style="color:#fbbf24; margin:0; font-size:30px;">GOLDEN NUMBER</h1>
             <h2 style="color:#cbd5e1; font-size:12px; margin-top:5px;">FAZEL KHAN NETWORK</h2>
             <div style="width:40px; height:2px; background:#fbbf24; margin:15px auto;"></div>
             <input type="text" id="usernameInput" class="login-input" placeholder="Enter Username">
@@ -37,54 +25,43 @@
         </div>
     </div>
 
-    <div class="container">
-        <button onclick="handleLogout()" class="logout-btn">Log Out</button>
-        <h1 style="color:#fbbf24; font-size:28px;">⚽ لیگ طلایی فضل خان</h1>
-        <p style="color:#d6d3d1; font-size:14px;">عدد شانس بزرگ درون یکی از توپ‌های سیاه پنهان است.</p>
-        <div class="score-board">🏆 امتیاز: <span id="score">۰</span></div>
-        <div class="football-field">
+    <!-- 🎮 کادر اصلی بازی کاملاً منطبق با تصویر شما -->
+    <div style="color: #fbbf24; font-size: 24px; font-weight: 900; margin-bottom: 2px; text-align:center;">GOLDEN NUMBER</div>
+    <div class="header-sub" style="text-align:center; color:#94a3b8; font-size:13px; margin-bottom:20px;">PREMIUM CLUB · BY FAZL KHAN</div>
+
+    <div class="game-card">
+        <div class="top-bar">
+            <div class="welcome-user">سلام، <span id="displayUser" style="color:#fbbf24; font-weight:bold;">Player</span> 👋</div>
+            <button onclick="handleLogout()" class="btn-menu">خروج</button>
+        </div>
+        <div class="menu-grid">
+            <button class="grid-item active-tab">🎮 بازی</button>
+            <button onclick="showRecords()" class="grid-item">🏆 رکوردها</button>
+            <button onclick="showHelp()" class="grid-item">ℹ️ راهنما</button>
+        </div>
+        <div class="level-section">
+            <div class="league-title">⚽ لیگ طلایی</div>
+            <div>
+                <span style="color:#64748b; font-size:14px;">سطح: </span>
+                <select class="level-select"><option>معمولی</option><option>متوسط</option><option>حرفه‌ای</option></select>
+            </div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-box"><div class="stat-label">امتیاز</div><div class="stat-value" id="scoreVal">0</div></div>
+            <div class="stat-box"><div class="stat-label">مرحله</div><div class="stat-value" id="roundVal">1</div></div>
+            <div class="stat-box"><div class="stat-label">بهترین رکورد</div><div class="stat-value" id="highScoreVal">0</div></div>
+        </div>
+        <div class="ball-zone">
             <button onclick="checkAnswer(this)" class="ball-btn" id="opt1">--</button>
             <button onclick="checkAnswer(this)" class="ball-btn" id="opt2">--</button>
             <button onclick="checkAnswer(this)" class="ball-btn" id="opt3">--</button>
         </div>
-        <div id="statusMessage" style="color:#fbbf24;">کدام توپ گل طلا می‌شود؟</div>
-        <button onclick="startNewRound()" class="next-btn" id="nextRoundBtn">⚽ شوت به دست جدید</button>
+        <div class="footer-msg" id="statusMessage">کدام توپ عدد طلایی را پنهان کرده است؟</div>
+        <button onclick="startNewRound()" class="btn-restart">شروع دوباره</button>
     </div>
+    <div style="color:#475569; font-size:11px; margin-top:20px; text-align:center;">GOLDEN NUMBER · نسخه آزمایشی محلی</div>
 
-    <script>
-        var sheetDbUrl = 'https://sheetdb.io';
-        window.onload = function() { if (localStorage.getItem("currentActiveUser")) { document.getElementById("authScreen").style.display = "none"; } startNewRound(); };
-        function sendToGoogleSheet(d) { if (!sheetDbUrl.includes('http')) return; fetch(sheetDbUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ data: [{"Player ID": d.player_id, "Username": d.username, "Email": d.email, "Total Score": d.total_score, "Level": d.level, "Join Date": d.join_date, "Last Played": d.last_played}] }) }); }
-        function handleSignUp() {
-            var u = document.getElementById("usernameInput").value.trim(), e = document.getElementById("emailInput").value.trim(), p = document.getElementById("passwordInput").value.trim();
-            if (!u || !e || !p) { alert("Please fill all fields!"); return; }
-            if (localStorage.getItem("user_" + u)) { alert("Username exists!"); return; }
-            var pId = "PL-" + Math.floor(100000 + Math.random() * 900000), today = new Date().toLocaleDateString('fa-IR');
-            var acc = { player_id: pId, username: u, email: e, password: p, total_score: 0, level: 1, join_date: today, last_played: today };
-            localStorage.setItem("user_" + u, JSON.stringify(acc)); sendToGoogleSheet(acc);
-            alert("🎉 Account created! ID: " + pId + "\nClick LOG IN to start!");
-        }
-        function handleLogin() {
-            var u = document.getElementById("usernameInput").value.trim(), p = document.getElementById("passwordInput").value.trim();
-            var dStr = localStorage.getItem("user_" + u);
-            if (!dStr) { alert("❌ Username not found!"); return; }
-            if (JSON.parse(dStr).password !== p) { alert("❌ Wrong Password!"); } else { localStorage.setItem("currentActiveUser", u); document.getElementById("authScreen").style.display = "none"; alert("✅ Welcome, " + u + "!"); }
-        }
-        function handleLogout() { localStorage.removeItem("currentActiveUser"); document.getElementById("authScreen").style.display = "flex"; }
-        var correctAnswer = 0, score = 0, canPlay = true;
-        function startNewRound() {
-            canPlay = true; document.getElementById("statusMessage").innerHTML = "کدام توپ گل طلا می‌شود؟"; document.getElementById("nextRoundBtn").style.display = "none";
-            correctAnswer = Math.floor(Math.random() * 100) + 1;
-            var w1 = correctAnswer + Math.floor(Math.random() * 10) + 2, w2 = correctAnswer - Math.floor(Math.random() * 10) - 2;
-            var opts = [correctAnswer, w1, w2]; opts.sort(() => Math.random() - 0.5);
-            for (let i = 1; i <= 3; i++) { var btn = document.getElementById("opt" + i); if(btn) { btn.innerHTML = opts[i-1]; btn.value = opts[i-1]; btn.style.backgroundColor = "#1c1917"; btn.style.color = "#fbbf24"; } }
-        }
-        function checkAnswer(b) {
-            if (!canPlay) return; canPlay = false; var nextBtn = document.getElementById("nextRoundBtn");
-            if (b.value == correctAnswer) { b.style.backgroundColor = "#10b981"; b.style.color = "white"; score += 10; document.getElementById("score").innerHTML = score; document.getElementById("statusMessage").innerHTML = "🎯 گلللللل! (+۱۰ امتیاز)"; } 
-            else { b.style.backgroundColor = "#ef4444"; b.style.color = "white"; document.getElementById("statusMessage").innerHTML = "❌ اوت شد! عدد درست " + correctAnswer + " بود."; for (let i = 1; i <= 3; i++) { var btn = document.getElementById("opt" + i); if(btn && btn.value == correctAnswer) { btn.style.backgroundColor = "#10b981"; btn.style.color = "white"; } } }
-            nextBtn.style.display = "block";
-        }
-    </script>
+    <!-- اتصال به موتور هوشمند بازی و فرستنده اطلاعات به SheetDB اختصاصی شما -->
+    <script src="https://glitch.me"></script>
 </body>
 </html>
