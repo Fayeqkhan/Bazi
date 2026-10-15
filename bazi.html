@@ -2,7 +2,6 @@
 <html lang="fa" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GOLDEN NUMBER</title><style>:root{--gold:#ffd166;--gold2:#f59e0b;--bg:#080d1b;--panel:#111a2d;--line:#35415a;--green:#22c55e;--red:#ef4444}*{box-sizing:border-box}body{margin:0;min-height:100vh;color:#f8fafc;font-family:Tahoma,sans-serif;background:radial-gradient(ellipse at top,#1d2b45 0,#0b1020 48%,#060912 100%);background-attachment:fixed;display:flex;align-items:center;justify-content:center}.hidden{display:none!important}.auth-container{background:linear-gradient(145deg,#151f34ee,#0e1628ee);border:2px solid #fbbf24;border-radius:28px;padding:35px 20px;width:92%;max-width:410px;text-align:center;box-shadow:0 18px 55px #0006}.logo-gold{font-size:34px;font-weight:900;color:#fbbf24;text-shadow:0 0 25px rgba(251,191,36,0.7)}.sub-title{color:#b9c4d9;font-size:11px;font-weight:bold;margin-bottom:20px}.promo-zone{display:flex;justify-content:space-between;align-items:center;background:rgba(251,191,36,0.06);border:1px dashed #fbbf24;border-radius:18px;padding:12px;margin-bottom:20px}.promo-balls{display:flex;flex-direction:column;gap:6px}.mini-ball{width:32px;height:32px;border-radius:50%;border:2px solid #fbbf24;background:radial-gradient(circle,#46516a,#111827);display:flex;align-items:center;justify-content:center;color:#fbbf24;font-weight:bold}.promo-coin-box{display:flex;flex-direction:column;align-items:center;gap:4px}.gold-coin{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#fbbf24,#d97706);border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 0 15px #fbbf24}.coin-text{color:#fbbf24;font-size:12px;font-weight:900}h2{font-size:20px;color:#fbbf24;margin:10px 0}.small{font-size:12px;color:#a9b6cd;margin-bottom:15px}.input-field{width:100%;padding:13px 14px;margin:9px 0;border-radius:12px;border:1px solid #45516b;background:#080f1f;color:#fff;text-align:center;outline:none}.btn-group{display:flex;flex-direction:column;gap:10px;margin-top:20px}.btn{width:100%;padding:12px 18px;font-size:16px;font-weight:800;border-radius:12px;border:none;cursor:pointer}.btn-primary{background:linear-gradient(100deg,#f59e0b,#ffe08a);color:#241400}.btn-secondary{background:#263550;color:#fff;border:1px solid #4b5a75}.game-panel{background:linear-gradient(145deg,#151f34ee,#0e1628ee);border:1px solid var(--line);border-radius:22px;padding:25px;width:95%;max-width:500px}.topline{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.tabs{display:flex;gap:8px;margin-bottom:16px}.tab{background:#17233a;color:#dbeafe;border:1px solid #3c4b67;border-radius:10px;padding:9px 13px}.tab.active{background:#fbbf24;color:#1c1917;font-weight:bold}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.stat{background:#0a1223;border:1px solid #2d3b55;border-radius:14px;padding:13px 8px;text-align:center}.stat strong{display:block;color:var(--gold);font-size:23px;margin-top:6px}.field-area{background:linear-gradient(#123a2d,#0b251f);border:2px solid #27634c;border-radius:18px;padding:22px 12px;margin:18px 0;position:relative}.balls{display:flex;justify-content:center;gap:15px}.ball{width:90px;height:90px;border-radius:50%;border:3px solid #fbbf24;background:radial-gradient(circle,#46516a,#111827);color:var(--gold);font-size:25px;font-weight:900;box-shadow:0 8px 18px #0008}.ball.correct{background:linear-gradient(135deg,#16a34a,#064e3b);border-color:#86efac;color:white}.ball.wrong{background:linear-gradient(135deg,#dc2626,#7f1d1d);border-color:#fca5a5;color:white}#message{font-weight:bold;color:var(--gold);font-size:16px;margin:15px 0}footer{text-align:center;color:#8290aa;font-size:12px;margin-top:22px}</style></head><body><div id="authPanel" class="auth-container"><div class="logo-gold">GOLDEN NUMBER</div><div class="sub-title">PREMIUM CLUB · BY FAZL KHAN</div><div class="promo-zone"><div class="promo-balls"><div class="mini-ball">⚽</div><div class="mini-ball">⚽</div><div class="mini-ball">⚽</div></div><div style="color:#fff;font-size:13px;font-weight:bold;max-width:140px">یکی از توپ‌ها حاوی عدد طلایی شانس است! شوت بزن...</div><div class="promo-coin-box"><div class="gold-coin">🪙</div><div class="coin-text">۱00 سکه برنده شو</div></div></div><h2 id="authTitle">ورود بازیکن به میدان</h2><p id="authNotice" class="small">نام کاربری و رمز خود را وارد کنید.</p><input id="username" class="input-field" placeholder="نام کاربری بازیکن"><input id="email" class="input-field hidden" placeholder="آدرس ایمیل بازیکن"><input id="password" class="input-field" type="password" placeholder="رمز عبور حساب"><div class="btn-group"><button class="btn btn-primary" id="mainBtn" onclick="handleSubmit()">ورود به میدان مسابقه</button><button class="btn btn-secondary" id="switchBtn" onclick="toggleAuthMode()">ثبت‌نام حساب جدید</button></div><footer>GOLDEN NUMBER NETWORK © 2026</footer></div><div id="gamePanel" class="game-panel hidden"><div class="topline"><div id="welcomeMsg" style="font-weight:bold">سلام 👋</div><button class="btn btn-secondary" style="padding:6px 15px;width:auto;background:#7f1d1d;color:white;border:none" onclick="handleLogout()">خروج</button></div><div class="tabs" style="margin-top:16px"><button class="tab active">🎮 بازی</button><button class="tab" onclick="alert('به زودی!')">🏆 رکوردها</button><button class="tab" onclick="alert('عدد درست را پیدا کن!')">ℹ️ راهنما</button></div><div class="topline" style="margin:16px 0"><div style="color:var(--gold);font-weight:bold;font-size:18px;">⚽ لیگ طلایی</div><div><span>سطح: </span><select style="background:#17233a;color:white;padding:5px;border-radius:8px;"><option>معمولی</option><option>متوسط</option><option>حرفه‌ای</option></select></div></div><div class="stats"><div class="stat">امتیاز<strong id="scoreVal">0</strong></div><div class="stat">مرحله<strong id="roundVal">1</strong></div><div class="stat">بهترین رکورد<strong id="highScoreVal">0</strong></div></div><div class="field-area"><div class="balls"><button class="ball" id="opt1" onclick="checkAnswer(this)">--</button><button class="ball" id="opt2" onclick="checkAnswer(this)">--</button><button class="ball" id="opt3" onclick="checkAnswer(this)">--</button></div></div><div id="message">کدام توپ عدد طلایی را پنهان کرده است؟</div><div class="actions"><button class="btn btn-primary" onclick="startNewRound()">شروع دوباره</button></div><footer>GOLDEN NUMBER · پایگاه داده فضل خان</footer></div><script>
 var sheetDbUrl = 'https://sheetdb.io';
 var isSignUpMode = false, correctAnswer = 0, score = 0, round = 1, highScore = 0, canPlay = true, player = null, currentOptions = [];
-
 function toggleAuthMode(){
     isSignUpMode = !isSignUpMode;
     var t = document.getElementById('authTitle'), n = document.getElementById('authNotice'), e = document.getElementById('email'), m = document.getElementById('mainBtn'), s = document.getElementById('switchBtn');
@@ -20,7 +19,6 @@ function toggleAuthMode(){
         s.innerHTML = "ثبت‌نام حساب جدید";
     }
 }
-
 function handleSubmit(){
     var u = document.getElementById('username').value.trim(), p = document.getElementById('password').value.trim(), e = document.getElementById('email').value.trim();
     if(!u || !p){ alert("لطفاً کادرها را پر کنید!"); return; }
@@ -48,36 +46,28 @@ function handleSubmit(){
         showGame(u);
     }
 }
-
 function showGame(name){
     player = name;
     document.getElementById('welcomeMsg').innerHTML = "سلام، " + name + " 👋";
     document.getElementById('authPanel').classList.add('hidden');
     document.getElementById('gamePanel').classList.remove('hidden');
     document.getElementById('gamePanel').style.maxWidth = '440px'; document.getElementById('gamePanel').style.width = '92%'; document.getElementById('gamePanel').style.margin = '0 auto'; document.getElementById('gamePanel').style.padding = '25px 15px';
-
     var h = localStorage.getItem("high_" + player);
     highScore = h ? parseInt(h) : 0;
     score = 0; round = 1;
     renderStats();
     startNewRound();
-
-
-
 function renderStats(){
     document.getElementById('scoreVal').innerHTML = Number(score).toLocaleString('fa-IR');
     document.getElementById('roundVal').innerHTML = Number(round).toLocaleString('fa-IR');
     document.getElementById('highScoreVal').innerHTML = Number(highScore).toLocaleString('fa-IR');
 }
-
 function handleLogout(){
     localStorage.removeItem('currentActiveUser');
     document.getElementById('authPanel').classList.remove('hidden');
     document.getElementById('gamePanel').classList.add('hidden');
 }
  function sendScore(s){if(!sheetDbUrl||!sheetDbUrl.includes('http'))return;var today=new Date().toLocaleDateString('fa-IR');var pId="PL-"+Math.floor(100000+Math.random()*900000);fetch(sheetDbUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:[{"Player ID":pId,"Username":player||"Unknown","Email":(player||"test")+"@game.com","Total Score":s,"Level":Math.floor(s/50)+1,"Join Date":today,"Last Played":today}]})});}
-
-
 function startNewRound(){
     canPlay = true;
     document.getElementById('message').innerHTML = "کدام توپ عدد طلایی را پنهان کرده است؟";
@@ -121,11 +111,8 @@ function checkAnswer(b){
 window.onload = function(){
     var s = localStorage.getItem("currentActiveUser");
     if(s){ showGame(s); }
-   setTimeout(function(){ const tb = document.querySelector('.topline'); if(tb){ tb.style.background = 'rgba(251, 191, 36, 0.05)'; tb.style.padding = '10px 14px'; tb.style.borderRadius = '15px'; tb.style.border = '1px solid var(--line)'; tb.style.marginBottom = '15px'; tb.style.display = 'flex'; tb.style.justifyContent = 'space-between'; tb.style.alignItems = 'center'; const wm = document.getElementById('welcomeMsg'); if(wm){ wm.outerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#fbbf24,#d97706);display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 0 10px rgba(251,191,36,0.4);color:#000;">👤</div><div id="welcomeMsg" style="font-weight:bold;font-size:14px;color:#fff;">${wm.innerHTML}</div></div>`; } const btn = tb.querySelector('.btn.danger') || tb.querySelector('button'); if(btn){ btn.outerHTML = `<div style="position:relative;"><button class="btn secondary" style="padding:6px 12px;font-size:14px;width:auto;border-radius:10px;" onclick="document.getElementById('settingsMenu').classList.toggle('hidden')">⚙️ تنظیمات</button><div id="settingsMenu" class="hidden" style="position:absolute;left:0;top:40px;background:#111a2d;border:1px solid var(--line);border-radius:12px;padding:8px;width:120px;box-shadow:0 10px 25px rgba(0,0,0,0.5);z-index:100;"><button class="btn danger" style="padding:8px;font-size:13px;border-radius:8px;width:100%;background:#7f1d1d;color:#fff;border:none;" onclick="handleLogout()">Border🚪 خروج</button></div></div>`; } } }, 100);
- 
+   setTimeout(function(){ const tb = document.querySelector('.topline'); if(tb){ tb.style.background = 'rgba(251, 191, 36, 0.05)'; tb.style.padding = '10px 14px'; tb.style.borderRadius = '15px'; tb.style.border = '1px solid var(--line)'; tb.style.marginBottom = '15px'; tb.style.display = 'flex'; tb.style.justifyContent = 'space-between'; tb.style.alignItems = 'center'; const wm = document.getElementById('welcomeMsg'); if(wm){ wm.outerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#fbbf24,#d97706);display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 0 10px rgba(251,191,36,0.4);color:#000;">👤</div><div id="welcomeMsg" style="font-weight:bold;font-size:14px;color:#fff;">${wm.innerHTML}</div></div>`; } const btn = tb.querySelector('.btn.danger') || tb.querySelector('button'); if(btn){ btn.outerHTML = `<div style="position:relative;"><button class="btn secondary" style="padding:6px 12px;font-size:14px;width:auto;border-radius:10px;" onclick="document.getElementById('settingsMenu').classList.toggle('hidden')">⚙️ تنظیمات</button><div id="settingsMenu" class="hidden" style="position:absolute;left:0;top:40px;background:#111a2d;border:1px solid var(--line);border-radius:12px;padding:8px;width:120px;box-shadow:0 10px 25px rgba(0,0,0,0.5);z-index:100;"><button class="btn danger" style="padding:8px;font-size:13px;border-radius:8px;width:100%;background:#7f1d1d;color:#fff;border:none;" onclick="handleLogout()">Border🚪 خروج</button></div></div>`; } } }, 100); 
 };
 </script>
 </body>
 </html>
-
-
