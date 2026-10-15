@@ -13,7 +13,7 @@ function toggleAuthMode(){
         m.innerHTML = "ایجاد حساب و عضویت واقعی";
         s.innerHTML = "قبلاً ثبت‌نام کرده‌ام؟ ورود";
     }else{
-        t.innerHTML = "ورود بازیکن به میدان";
+        t.innerHTML = "ورود بازیکن به بازی اعداد طلایی";
         n.innerHTML = "نام و رمز خود را وارد کنید.";
         e.classList.add('hidden');
         m.innerHTML = "ورود به میدان مسابقه";
@@ -37,7 +37,7 @@ function handleSubmit(){
                 body: JSON.stringify({ data: [acc] })
             });
         }
-        alert("🎉 حساب واقعی ایجاد شد! حالا وارد شوید.");
+        alert("🎉 حساب جدید ایجاد شد! حالا وارد شوید.");
         toggleAuthMode();
     }else{
         var sData = localStorage.getItem("user_" + u);
@@ -54,6 +54,8 @@ function showGame(name){
     document.getElementById('welcomeMsg').innerHTML = "سلام، " + name + " 👋";
     document.getElementById('authPanel').classList.add('hidden');
     document.getElementById('gamePanel').classList.remove('hidden');
+    document.getElementById('gamePanel').style.maxWidth = '440px'; document.getElementById('gamePanel').style.width = '92%'; document.getElementById('gamePanel').style.margin = '0 auto'; document.getElementById('gamePanel').style.padding = '25px 15px';
+
     var h = localStorage.getItem("high_" + player);
     highScore = h ? parseInt(h) : 0;
     score = 0; round = 1;
