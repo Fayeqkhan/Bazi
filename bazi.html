@@ -1,351 +1,216 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1020">
-<title>GOLDEN NUMBER | Premium Club</title>
-<style>
-:root{--gold:#ffd166;--gold2:#f59e0b;--bg:#070b17;--panel:#111a2d;--line:#35415a;--green:#22c55e;--red:#ef4444}
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;color:#f8fafc;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:radial-gradient(ellipse at 50% -10%,#37456b 0,#111a30 35%,#080d1b 72%,#050710 100%);background-attachment:fixed}
-button,input,select{font:inherit}
-button{cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #fff;outline-offset:3px}
-.wrap{width:min(1000px,94%);margin:auto;padding:22px 0 42px}
-header{text-align:center;padding:22px 8px 28px}
-.logo{font-size:clamp(32px,7vw,58px);font-weight:1000;letter-spacing:2px;line-height:1.05;color:transparent;background:linear-gradient(100deg,#fff3b0 0%,#ffd166 35%,#f59e0b 65%,#fff0a6 100%);-webkit-background-clip:text;background-clip:text;text-shadow:0 8px 32px #f59e0b22}
-.sub{color:#b9c4d9;margin-top:12px;letter-spacing:3px;font-size:11px;font-weight:800}
-.panel{background:linear-gradient(145deg,#17223aee,#0b1325f5);border:1px solid #465474;border-radius:26px;padding:clamp(18px,4vw,32px);box-shadow:0 24px 70px #0008,inset 0 1px #ffffff0b;margin:16px auto;backdrop-filter:blur(14px)}
-.hidden{display:none!important}
-.auth{max-width:470px;margin:14px auto}
-h2{margin:0 0 14px;color:var(--gold);letter-spacing:.2px}
-.field{display:block;width:100%;padding:14px 15px;margin:12px 0;border-radius:14px;border:1px solid #455573;background:#080f1f;color:white;transition:border .2s,box-shadow .2s}
-.field:focus{border-color:#fbbf24;box-shadow:0 0 0 4px #fbbf2418}
-.btn{border:0;border-radius:14px;padding:13px 19px;font-weight:850;transition:transform .16s,filter .16s,box-shadow .16s}
-.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
-.btn:active{transform:scale(.98)}
-.primary{background:linear-gradient(110deg,#f59e0b,#ffe7a0);color:#241400;box-shadow:0 8px 24px #f59e0b26}
-.secondary{background:#24334f;color:#fff;border:1px solid #4b5d7d}
-.danger{background:#7f1d1d;color:white}
-.success{background:#14532d;color:#fff}
-.small{font-size:12px;color:#a9b6cd;line-height:1.8}
-.tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px}
-.tab{background:#17233a;color:#dbeafe;border:1px solid #3c4b67;border-radius:12px;padding:10px 15px;font-weight:750}
-.tab.active{background:linear-gradient(100deg,#f59e0b,#ffe08a);color:#211600;border-color:#fbbf24;box-shadow:0 6px 20px #f59e0b22}
-.topline{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}
-.stat{background:linear-gradient(145deg,#0a1223,#111d33);border:1px solid #2d3b55;border-radius:17px;padding:16px 8px;text-align:center;color:#c4cee0;font-size:13px}
-.stat strong{display:block;color:var(--gold);font-size:clamp(22px,4vw,29px);margin-top:7px;font-variant-numeric:tabular-nums}
-.field-area{background:radial-gradient(ellipse at 50% 0%,#236448,#0c3026 70%);border:2px solid #398360;border-radius:22px;padding:clamp(22px,5vw,38px) 12px;margin:20px 0;position:relative;overflow:hidden;box-shadow:inset 0 0 45px #0004}
-.field-area:before{content:"";position:absolute;inset:12px;border:1px solid #ffffff24;border-radius:14px;pointer-events:none}
-.field-area:after{content:"";position:absolute;left:50%;top:12px;bottom:12px;border-left:1px solid #ffffff18;pointer-events:none}
-.balls{display:flex;justify-content:center;gap:clamp(10px,3vw,24px);flex-wrap:wrap;position:relative;z-index:1}
-.ball{width:clamp(78px,20vw,118px);height:clamp(78px,20vw,118px);border-radius:50%;border:3px solid #ffd166;background:radial-gradient(circle at 30% 23%,#58647d,#1b2437 57%,#0c1322);color:#ffe08a;font-size:clamp(21px,5vw,29px);font-weight:950;box-shadow:0 12px 22px #0008,inset 0 0 20px #0008,0 0 0 5px #ffd16613;transition:transform .2s,box-shadow .2s,border .2s}
-.ball:hover:not(:disabled){transform:translateY(-7px) scale(1.03);box-shadow:0 17px 28px #0009,0 0 24px #fbbf2445}
-.ball:disabled{cursor:default}
-.ball.correct{background:linear-gradient(135deg,#22c55e,#065f46);border-color:#bbf7d0;color:white;animation:pop .4s;box-shadow:0 0 30px #22c55e44}
-.ball.wrong{background:linear-gradient(135deg,#dc2626,#7f1d1d);border-color:#fecaca;color:white;animation:shake .28s}
-@keyframes pop{50%{transform:scale(1.12)}}@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-#message{min-height:34px;font-weight:800;color:var(--gold);line-height:1.8;text-align:center}
-.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
-table{width:100%;border-collapse:collapse;margin-top:14px}
-th,td{text-align:center;padding:13px 7px;border-bottom:1px solid #2b3850}
-th{color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:1px}
-footer{text-align:center;color:#8290aa;font-size:11px;letter-spacing:1.5px;margin-top:26px}
-.notice{padding:13px 15px;border-radius:14px;background:#42200666;border:1px solid #92400e;color:#fde68a;line-height:1.9;font-size:13px}
-.brandmark{display:inline-flex;align-items:center;gap:7px;border:1px solid #69552c;background:#fbbf2410;color:#ffe5a0;border-radius:999px;padding:7px 12px;font-size:11px;font-weight:800;letter-spacing:1.2px;margin-bottom:18px}
+    <meta charset="UTF-8">
+    <title>GOLDEN NUMBER - FAZEL KHAN DATABASE</title>
+    <style>
+        @keyframes bgMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1a1a1a, #2c1a04, #0f172a);
+            background-size: 400% 400%;
+            animation: bgMove 12s ease infinite;
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        #authScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(circle at center, #1e1e1e 0%, #000000 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .auth-card {
+            background: #111827;
+            padding: 35px 20px;
+            border-radius: 25px;
+            border: 2px solid #fbbf24;
+            width: 85%;
+            max-width: 350px;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.25);
+        }
+        .gold-text { color: #fbbf24; text-shadow: 0 0 15px rgba(251, 191, 36, 0.6); font-weight: 900; }
+        .login-input {
+            width: 85%;
+            padding: 12px;
+            margin: 8px 0;
+            background: #1f2937;
+            border: 1px solid #d97706;
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+            text-align: center;
+            outline: none;
+        }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; align-items: center; }
+        .auth-btn { color: #000000; border: none; padding: 14px; font-size: 16px; border-radius: 25px; cursor: pointer; font-weight: bold; width: 90%; }
+        .btn-login { background: linear-gradient(90deg, #d97706, #fbbf24); }
+        .btn-signup { background: #1f2937; color: #fbbf24; border: 1px solid #fbbf24; }
 
-.profile-chip{display:flex;align-items:center;gap:12px}
-.avatar-btn{width:48px;height:48px;border-radius:16px;border:1px solid #92722e;background:linear-gradient(145deg,#3a2d12,#17223a);font-size:24px;box-shadow:0 8px 24px #0005}
-.tiny-label{font-size:10px;letter-spacing:1.5px;color:#a9b6cd;margin-bottom:4px;font-weight:800}
-.header-actions{display:flex;gap:8px;flex-wrap:wrap}
-.mini-panel{margin:16px 0;padding:18px;border:1px solid #5a4b2b;border-radius:18px;background:linear-gradient(145deg,#17233a,#101729);box-shadow:inset 0 1px #ffffff0b}
-.mini-panel h3{margin:0;color:var(--gold)}
-.profile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
-.profile-grid>div{display:flex;flex-direction:column;gap:7px;padding:12px;background:#080f1f;border:1px solid #2d3b55;border-radius:12px;overflow-wrap:anywhere}
-.profile-grid strong{font-size:14px;color:#fff}
-.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
-.setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px;background:#080f1f;border:1px solid #2d3b55;border-radius:13px}
-.setting-row strong,.setting-row small{display:block}
-.setting-row strong{font-size:13px;color:#f8fafc}
-.setting-row small{font-size:11px;color:#9eacc5;margin-top:5px;line-height:1.5}
-.setting-row input{width:20px;height:20px;accent-color:#fbbf24;flex-shrink:0}
-body.reduce-motion *,body.reduce-motion *:before,body.reduce-motion *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-.hint-line{font-size:12px;color:#d1d5db;text-align:center;margin-top:7px;min-height:18px}
-@media(max-width:520px){.settings-grid{grid-template-columns:1fr}.profile-grid{grid-template-columns:1fr}.header-actions .btn{padding:10px 12px}.stats{gap:7px}.stat{font-size:11px;padding:12px 3px}.stat strong{font-size:20px}.panel{border-radius:20px}.sub{letter-spacing:2px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+        .container {
+            background: linear-gradient(135deg, rgba(28, 25, 23, 0.95), rgba(68, 64, 60, 0.95));
+            padding: 30px;
+            border-radius: 30px;
+            width: 85%;
+            max-width: 420px;
+            margin: 20px auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+            border: 2px solid #fbbf24;
+            direction: rtl;
+            position: relative;
+        }
+        .logout-btn { background: #ef4444; color: white; border: none; padding: 6px 15px; font-size: 12px; border-radius: 20px; cursor: pointer; position: absolute; top: 15px; left: 15px; }
+        .score-board { font-size: 18px; color: #000000; margin-bottom: 25px; font-weight: bold; background: linear-gradient(90deg, #d97706, #fbbf24); padding: 10px 25px; border-radius: 50px; display: inline-block; margin-top: 20px; }
+        .football-field { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
+        .ball-btn { background-color: #1c1917; color: #fbbf24; border: 3px solid #d97706; width: 80px; height: 80px; font-size: 22px; border-radius: 50%; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); }
+        .next-btn { background: linear-gradient(90deg, #10b981, #059669); color: white; border: none; padding: 14px 25px; font-size: 16px; border-radius: 12px; cursor: pointer; margin-top: 20px; display: none; width: 100%; }
+    </style>
 </head>
 <body>
-<div class="wrap">
-<header><div class="brandmark">✦ PREMIUM GAME EXPERIENCE</div><div class="logo">GOLDEN NUMBER</div><div class="sub">PREMIUM CLUB&nbsp; · &nbsp;BY FAZEL KHAN</div></header>
 
-<section id="authPanel" class="panel auth">
-  <h2 id="authTitle">Welcome Back</h2>
-  <p class="small">Enter your email to start playing. This demo stores your profile on this device only.</p>
-  <input id="username" class="field" type="email" maxlength="120" autocomplete="email" placeholder="Email address" aria-label="Email address">
-  <input id="password" class="field" type="password" maxlength="80" autocomplete="current-password" placeholder="Password (demo only)" aria-label="Password">
-  <div class="actions"><button class="btn primary" id="loginBtn">Enter the Arena</button><button class="btn secondary" id="registerBtn">Create Local Profile</button></div>
-  <p class="small">Demo notice: this is not secure account authentication. Your password is not saved or verified. A real login system requires a backend service.</p>
-</section>
-
-<main id="gamePanel" class="panel hidden">
-  <div class="topline">
-    <div class="profile-chip"><button class="avatar-btn" id="profileBtn" aria-label="Open player profile" title="Player Profile">👤</button><div><div class="tiny-label">PLAYER PROFILE</div><div>Welcome, <strong id="playerName" style="color:var(--gold)"></strong> 👋</div></div></div>
-    <div class="header-actions"><button class="btn secondary" id="settingsBtn">⚙ Settings</button><button class="btn secondary" id="logoutBtn">Log Out</button></div>
-  </div>
-  <section id="profilePanel" class="mini-panel hidden">
-    <div class="topline"><h3>👤 Player Profile</h3><button class="btn secondary" id="closeProfileBtn">Close</button></div>
-    <div class="profile-grid"><div><span class="small">Email</span><strong id="profileEmail">—</strong></div><div><span class="small">Current Score</span><strong id="profileScore">0</strong></div><div><span class="small">Current Level</span><strong id="profileLevel">1</strong></div></div>
-    <p class="small">This profile is saved only in this browser on this device.</p>
-  </section>
-  <section id="settingsPanel" class="mini-panel hidden">
-    <div class="topline"><h3>⚙ Advanced Settings</h3><button class="btn secondary" id="closeSettingsBtn">Close</button></div>
-    <div class="settings-grid">
-      <label class="setting-row"><span><strong>Sound Effects</strong><small>Play a sound after each pick</small></span><input id="soundSetting" type="checkbox" checked></label>
-      <label class="setting-row"><span><strong>Reduced Motion</strong><small>Reduce game animations</small></span><input id="motionSetting" type="checkbox"></label>
-      <label class="setting-row"><span><strong>Confirm Restart</strong><small>Ask before restarting a game</small></span><input id="confirmSetting" type="checkbox" checked></label>
-      <label class="setting-row"><span><strong>Show Number Hints</strong><small>Display a small hint before choosing</small></span><input id="hintSetting" type="checkbox"></label>
+    <div id="authScreen">
+        <div class="auth-card">
+            <h1 class="gold-text" style="font-size: 32px; margin: 0;">GOLDEN NUMBER</h1>
+            <h2 style="color: #cbd5e1; font-size: 12px; margin-top: 5px; font-weight: bold;">FAZEL KHAN NETWORK</h2>
+            <div style="width: 40px; height: 2px; background: #fbbf24; margin: 15px auto;"></div>
+            
+            <input type="text" id="usernameInput" class="login-input" placeholder="Enter Username">
+            <input type="text" id="emailInput" class="login-input" placeholder="Enter Email (Only for Sign Up)">
+            <input type="password" id="passwordInput" class="login-input" placeholder="Enter Password">
+            
+            <div class="btn-group">
+                <button onclick="handleLogin()" class="auth-btn btn-login">LOG IN / ورود</button>
+                <button onclick="handleSignUp()" class="auth-btn btn-signup">CREATE ACCOUNT / ثبت‌نام</button>
+            </div>
+        </div>
     </div>
-    <div class="actions"><button class="btn primary" id="saveSettingsBtn">Save Settings</button><button class="btn secondary" id="resetSettingsBtn">Reset Settings</button></div>
-    <p id="settingsMessage" class="small" role="status" aria-live="polite"></p>
-  </section>
-  <div class="tabs" style="margin-top:18px">
-    <button class="tab active" data-tab="play">🎮 Play</button><button class="tab" data-tab="leaderboard">🏆 Leaderboard</button><button class="tab" data-tab="help">ℹ️ How to Play</button>
-  </div>
-  <section id="playTab">
-    <div class="topline"><h2>⚽ Golden League</h2><label>Difficulty:
-      <select id="difficulty" class="field" style="display:inline-block;width:auto;margin:0;padding:8px">
-        <option value="easy">Easy</option><option value="normal" selected>Normal</option><option value="hard">Hard</option>
-      </select></label></div>
-    <p class="small">Choose a ball, find the Golden Number, and earn points!</p>
-    <div class="stats">
-      <div class="stat">SCORE<strong id="score">0</strong></div>
-      <div class="stat">LEVEL<strong id="level">1</strong></div>
-      <div class="stat">BEST SCORE<strong id="best">0</strong></div>
+
+    <div class="container">
+        <button onclick="handleLogout()" class="logout-btn">Log Out</button>
+        <h1 class="gold-text" style="font-size: 28px; margin-top: 15px;">⚽ لیگ طلایی فضل خان</h1>
+        <p style="color: #d6d3d1; font-size: 14px;">عدد شانس بزرگ درون یکی از توپ‌های سیاه پنهان است. شوت بزن!</p>
+        <div class="score-board">🏆 امتیاز فضل خان: <span id="score">۰</span></div>
+        <div class="football-field">
+            <button onclick="checkAnswer(this)" class="ball-btn" id="opt1">--</button>
+            <button onclick="checkAnswer(this)" class="ball-btn" id="opt2">--</button>
+            <button onclick="checkAnswer(this)" class="ball-btn" id="opt3">--</button>
+        </div>
+        <div id="statusMessage" style="color: #fbbf24;">کدام توپ گل طلا می‌شود؟</div>
+        <button onclick="startNewRound()" class="next-btn" id="nextRoundBtn">⚽ شوت به دست جدید</button>
     </div>
-    <div class="field-area"><div class="balls">
-      <button class="ball" id="ball0" aria-label="Ball one">⚽</button><button class="ball" id="ball1" aria-label="Ball two">⚽</button><button class="ball" id="ball2" aria-label="Ball three">⚽</button>
-    </div></div>
-    <div id="message" role="status" aria-live="polite">Ready? Pick a ball to reveal the Golden Number.</div><div id="hintLine" class="hint-line"></div>
-    <div class="actions"><button class="btn primary hidden" id="nextBtn">Next Level →</button><button class="btn secondary" id="resetBtn">Restart Game</button></div>
-  </section>
-  <section id="leaderboardTab" class="hidden"><h2>🏆 Local Leaderboard</h2><p class="small">Scores are saved only in this browser. This is not a global leaderboard.</p><div id="records"></div><div class="actions"><button id="clearRecords" class="btn danger">Clear Local Records</button></div></section>
-  <section id="helpTab" class="hidden"><h2>How to Play</h2><p>• Pick the correct ball to earn points.</p><p>• Each new level increases the number range.</p><p>• Hard mode awards more points, but makes the challenge tougher.</p><div class="notice">Profiles, scores, and records are stored in this browser only. Clearing browser data or changing devices may remove them. Secure accounts and a global leaderboard require a backend service.</div></section>
-</main>
-<footer>GOLDEN NUMBER · PREMIUM CLUB</footer>
-</div>
-<script>
-(() => {
-'use strict';
-const $ = id => document.getElementById(id);
-const KEY = 'goldenNumberV2';
-const SHEETS_API_URL = 'https://script.google.com/macros/s/AKfycbwq1dO7zOVQ08cI3RIbuEIZbhYJ6VrVfV3_LQL47_Um8q9t8eEwYSYh2iRpCX9zNlyF/exec';
-let player = null, score = 0, round = 1, answer = null, playable = false;
-let currentOptions = [];
-const SETTINGS_KEY = 'goldenNumberSettingsV1';
-const defaultSettings = {sound:true, motion:false, confirmRestart:true, hints:false};
-let settings = loadSettings();
-function loadSettings(){
-  try { return {...defaultSettings, ...(JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {})}; }
-  catch(e){ return {...defaultSettings}; }
-}
-function applySettings(){
-  document.body.classList.toggle('reduce-motion', !!settings.motion);
-  $('soundSetting').checked = !!settings.sound;
-  $('motionSetting').checked = !!settings.motion;
-  $('confirmSetting').checked = !!settings.confirmRestart;
-  $('hintSetting').checked = !!settings.hints;
-}
-function syncProfile(){
-  if(!player) return;
-  $('profileEmail').textContent = player;
-  $('profileScore').textContent = fa(score);
-  $('profileLevel').textContent = fa(round);
-}
-function playTone(success){
-  if(!settings.sound) return;
-  try {
-    const Ctx = window.AudioContext || window.webkitAudioContext;
-    if(!Ctx) return;
-    const ctx = new Ctx(), osc = ctx.createOscillator(), gain = ctx.createGain();
-    osc.type = 'sine'; osc.frequency.value = success ? 740 : 220;
-    gain.gain.setValueAtTime(0.07, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.16);
-    osc.connect(gain); gain.connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime + 0.17);
-    osc.onended = () => ctx.close();
-  } catch(e) {}
-}
-function updateHint(){
-  $('hintLine').textContent = settings.hints && playable ? 'Hint: The Golden Number is between ' + Math.max(1, answer - 15) + ' and ' + (answer + 15) + '.' : '';
-}
 
+    <script>
+        // 🔗 اتصال مستقیم از طریق سیستم کمکی هوشمند SheetDB
+        var sheetDbUrl = 'لینک_جدید_SheetDB_شما';
 
-function readData(){
-  try { return JSON.parse(localStorage.getItem(KEY)) || {players:{},records:[]}; }
-  catch(e){ return {players:{},records:[]}; }
-}
-function saveData(data){ try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e){} }
-function fa(n){ return Number(n).toLocaleString('en-US'); }
-function showGame(name){
-  player = name.toLowerCase();
-  $('playerName').textContent = name;
-  $('authPanel').classList.add('hidden');
-  $('gamePanel').classList.remove('hidden');
-  const d = readData();
-  score = Number(d.players[name]?.score || 0);
-  round = Number(d.players[name]?.round || 1);
-  updateStats();
-  applySettings();
-  syncProfile();
-  newRound();
-}
-function updateStats(){
-  const d=readData(), rec=d.records.find(x=>x.name===player);
-  $('score').textContent=fa(score);
-  $('level').textContent=fa(round);
-  $('best').textContent=fa(Math.max(score, Number(rec?.score||0)));
-  syncProfile();
-}
-function login(create){
-  const name=$('username').value.trim().toLowerCase();
-  const pass=$('password').value;
-  if(!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(name)){alert('Please enter a valid email address.');return;}
-  if(!pass){alert('Please enter a password for this demo form.');return;}
-  const d=readData();
-  if(create){
-    if(d.players[name]){alert('This email already has a local profile. Please log in.');return;}
-    d.players[name]={score:0,round:1};
-    saveData(d);
-  } else if(!d.players[name]){
-    // Local profile only; no password verification is performed.
-    d.players[name]={score:0,round:1};
-    saveData(d);
-  }
-  localStorage.setItem('goldenNumberActive',name);
-  showGame(name);
-}
-function saveProgress(){
-  const d=readData();
-  d.players[player]={score,round};
-  const old=d.records.find(x=>x.name===player);
-  if(old) old.score=Math.max(old.score,score);
-  else d.records.push({name:player,score});
-  d.records.sort((a,b)=>b.score-a.score);
-  d.records=d.records.slice(0,10);
-  saveData(d); updateStats();
-  // Send only public game progress to Google Sheets; never send the password.
-  try {
-    fetch(SHEETS_API_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({
-        playerId: player,
-        username: player,
-        email: player,
-        score: score,
-        level: round
-      })
-    }).catch(() => {});
-  } catch (e) {}
-}
-function newRound(){
-  playable=true; answer=null;
-  $('message').textContent='PICK THE GOLDEN BALL';
-  $('message').style.color='var(--gold)';
-  $('nextBtn').classList.add('hidden');
-  const mode=$('difficulty').value;
-  const max=mode==='easy'?20:mode==='hard'?200+round*10:100+round*5;
-  answer=1+Math.floor(Math.random()*max);
-  const spread=mode==='easy'?6:mode==='hard'?35:15;
-  const vals=new Set([answer]);
-  while(vals.size<3){
-    let v=answer+Math.floor(Math.random()*(spread*2+1))-spread;
-    if(v<1)v=1+Math.floor(Math.random()*max);
-    if(v!==answer) vals.add(v);
-  }
-  currentOptions=[...vals];
-  updateHint();
-  for(let i=0;i<3;i++){
-    const b=$('ball'+i); b.textContent=fa(currentOptions[i]); b.className='ball'; b.disabled=false;
-  }
-}
-function choose(i){
-  if(!playable)return;
-  playable=false;
-  $('hintLine').textContent='';
-  const mode=$('difficulty').value;
-  for(let j=0;j<3;j++){
-    const b=$('ball'+j); b.disabled=true;
-    if(currentOptions[j]===answer){b.classList.add('correct');b.textContent='✓ '+fa(answer);}
-  }
-  if(currentOptions[i]===answer){
-    const points=mode==='easy'?10:mode==='hard'?25:15;
-    score+=points; round++;
-    $('message').textContent='🎉 PERFECT PICK! +'+points+' POINTS';
-    $('message').style.color='var(--gold)';
-  } else {
-    $('ball'+i).classList.add('wrong');
-    $('message').textContent='NOT THIS TIME! The Golden Number was '+answer+'.';
-    $('message').style.color='#fca5a5';
-  }
-  saveProgress();
-  playTone(currentOptions[i]===answer);
-  $('nextBtn').classList.remove('hidden');
-}
-function setTab(tab){
-  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
-  ['play','leaderboard','help'].forEach(t=>$(t+'Tab').classList.toggle('hidden',t!==tab));
-  if(tab==='leaderboard') renderRecords();
-}
-function renderRecords(){
-  const d=readData();
-  if(!d.records.length){$('records').innerHTML='<p class="small">No records yet. Play a round to get on the board!</p>';return;}
-  const rows=d.records.map((r,i)=>`<tr><td>${fa(i+1)}</td><td>${escapeHTML(r.name)}</td><td>${fa(r.score)}</td></tr>`).join('');
-  $('records').innerHTML=`<table><thead><tr><th>رتبه</th><th>بازیکن</th><th>رکورد</th></tr></thead><tbody>${rows}</tbody></table>`;
-}
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+        window.onload = function() {
+            var savedSession = localStorage.getItem("currentActiveUser");
+            if (savedSession) { document.getElementById("authScreen").style.display = "none"; }
+            startNewRound();
+        };
 
-$('profileBtn').addEventListener('click',()=>{
-  $('settingsPanel').classList.add('hidden');
-  $('profilePanel').classList.toggle('hidden');
-  syncProfile();
-});
-$('closeProfileBtn').addEventListener('click',()=>$('profilePanel').classList.add('hidden'));
-$('settingsBtn').addEventListener('click',()=>{
-  $('profilePanel').classList.add('hidden');
-  $('settingsPanel').classList.toggle('hidden');
-  applySettings();
-});
-$('closeSettingsBtn').addEventListener('click',()=>$('settingsPanel').classList.add('hidden'));
-$('saveSettingsBtn').addEventListener('click',()=>{
-  settings={sound:$('soundSetting').checked,motion:$('motionSetting').checked,confirmRestart:$('confirmSetting').checked,hints:$('hintSetting').checked};
-  try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings));}catch(e){}
-  applySettings();updateHint();
-  $('settingsMessage').textContent='Settings saved on this device.';
-});
-$('resetSettingsBtn').addEventListener('click',()=>{
-  settings={...defaultSettings};
-  try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings));}catch(e){}
-  applySettings();updateHint();
-  $('settingsMessage').textContent='Settings restored to defaults.';
-});
+        function sendToGoogleSheet(playerData) {
+            if (sheetDbUrl === 'https://docs.google.com/spreadsheets/d/1e8hJ5ShMoWEDYN2vnQS_IKP3mSlvjHn9B4YKs1YwjQY/edit?usp=drivesdk') return;
+            
+            var payload = {
+                data: [{
+                    "Player ID": playerData.player_id,
+                    "Username": playerData.username,
+                    "Email": playerData.email,
+                    "Total Score": playerData.total_score,
+                    "Level": playerData.level,
+                    "Join Date": playerData.join_date,
+                    "Last Played": playerData.last_played
+                }]
+            };
 
-$('loginBtn').addEventListener('click',()=>login(false));
-$('registerBtn').addEventListener('click',()=>login(true));
-$('password').addEventListener('keydown',e=>{if(e.key==='Enter')login(false);});
-for(let i=0;i<3;i++)$('ball'+i).addEventListener('click',()=>choose(i));
-$('nextBtn').addEventListener('click',newRound);
-$('resetBtn').addEventListener('click',()=>{if(!settings.confirmRestart || confirm('Restart this game and reset your current score?')){score=0;round=1;saveProgress();newRound();}});
-$('difficulty').addEventListener('change',newRound);
-$('logoutBtn').addEventListener('click',()=>{localStorage.removeItem('goldenNumberActive');player=null;$('gamePanel').classList.add('hidden');$('profilePanel').classList.add('hidden');$('settingsPanel').classList.add('hidden');$('authPanel').classList.remove('hidden');$('password').value='';});
-document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
-$('clearRecords').addEventListener('click',()=>{if(confirm('Delete all local leaderboard records?')){const d=readData();d.records=[];saveData(d);renderRecords();updateStats();}});
-const saved=localStorage.getItem('goldenNumberActive');
-if(saved && readData().players[saved]) showGame(saved);
-})();
-</script>
-</body>
-</html>
+            fetch(sheetDbUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+        }
+
+        function handleSignUp() {
+            var user = document.getElementById("usernameInput").value.trim();
+            var email = document.getElementById("emailInput").value.trim();
+            var pass = document.getElementById("passwordInput").value.trim();
+            
+            if (user === "" || pass === "" || email === "") { alert("Please fill Username, Email and Password!"); return; }
+
+            var existingUser = localStorage.getItem("user_" + user);
+            if (existingUser) { alert("This username already exists!"); return; }
+
+            var pId = "PL-" + Math.floor(100000 + Math.random() * 900000);
+            var today = new Date().toLocaleDateString('fa-IR');
+
+            var accountData = {
+                player_id: pId,
+                username: user,
+                email: email,
+                password: pass,
+                total_score: 0,
+                level: 1,
+                join_date: today,
+                last_played: today
+            };
+
+            localStorage.setItem("user_" + user, JSON.stringify(accountData));
+            sendToGoogleSheet(accountData);
+            alert("🎉 Account successfully created! ID: " + pId + "\nNow click LOG IN to start!");
+        }
+
+        function handleLogin() {
+            var user = document.getElementById("usernameInput").value.trim();
+            var pass = document.getElementById("passwordInput").value.trim();
+            if (user === "" || pass === "") { alert("Please enter Username and Password!"); return; }
+
+            var savedDataStr = localStorage.getItem("user_" + user);
+            if (!savedDataStr) { alert("❌ Username not found!"); return; }
+
+            var savedData = JSON.parse(savedDataStr);
+            if (savedData.password !== pass) {
+                alert("❌ Wrong Password!");
+            } else {
+                localStorage.setItem("currentActiveUser", user);
+                document.getElementById("authScreen").style.display = "none";
+                alert("✅ Welcome, " + user + "!");
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem("currentActiveUser");
+            document.getElementById("authScreen").style.display = "flex";
+            document.getElementById("usernameInput").value = "";
+            document.getElementById("emailInput").value = "";
+            document.getElementById("passwordInput").value = "";
+        }
+
+        var correctAnswer = 0;
+        var score = 0;
+        var canPlay = true;
+
+        function startNewRound() {
+            canPlay = true;
+            document.getElementById("statusMessage").innerHTML = "کدام توپ گل طلا می‌شود؟";
+            document.getElementById("statusMessage").style.color = "#fbbf24";
+            document.getElementById("nextRoundBtn").style.display = "none";
+            
+            correctAnswer = Math.floor(Math.random() * 100) + 1;
+            var wrong1 = correctAnswer + Math.floor(Math.random() * 10) + 2;
+            var wrong2 = correctAnswer - Math.floor(Math.random() * 10) - 2;
+            if(wrong2 < 1) wrong2 = correctAnswer + 12;
+
