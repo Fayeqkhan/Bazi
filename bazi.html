@@ -61,18 +61,8 @@ function showGame(name){
     score = 0; round = 1;
     renderStats();
     startNewRound();
-}
 
-function sendScore(s){
-    if(!sheetDbUrl.includes('http')) return;
-    var today = new Date().toLocaleDateString('fa-IR');
-    var d = JSON.parse(localStorage.getItem("user_" + player)) || {};
-    fetch(sheetDbUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: [{ "Player ID": d.player_id || "PL-000000", "Username": player, "Email": d.email || "no@game.com", "Total Score": s, "Level": Math.floor(s / 50) + 1, "Join Date": d.join_date || today, "Last Played": today }] })
-    });
-}
+
 
 function renderStats(){
     document.getElementById('scoreVal').innerHTML = Number(score).toLocaleString('fa-IR');
@@ -85,6 +75,8 @@ function handleLogout(){
     document.getElementById('authPanel').classList.remove('hidden');
     document.getElementById('gamePanel').classList.add('hidden');
 }
+function sendScore(s){if(!sheetDbUrl||!sheetDbUrl.includes('http'))return;var today=new Date().toLocaleDateString('fa-IR');var pId="PL-"+Math.floor(100000+Math.random()*900000);fetch(sheetDbUrl,{method:'POST',headers:'Content-Type':'application/json'},body:JSON.stringify({data:[{"Player ID":pId,"Username":player||"Unknown","Email":(player||"test")+"@game.com","Total Score":s,"Level":Math.floor(s/50)+1,"Join Date":today,"Last Played":today}]})});}
+
 
 function startNewRound(){
     canPlay = true;
@@ -111,14 +103,14 @@ function checkAnswer(b){
         b.classList.add('correct');
         score += 10; round += 1;
         if(score > highScore){ highScore = score; localStorage.setItem("high_" + player, highScore); }
-        document.getElementById('message').innerHTML = "🎯 گلللللل! دست بعدی!";
+        document.getElementById('message').innerHTML = "🎯 عالی دست بعدی!";
         document.getElementById('message').style.color = "var(--green)";
         renderStats();
         sendScore(score);
     }else{
         b.classList.add('wrong');
         var f = score; score = 0; round = 1;
-        document.getElementById('message').innerHTML = "❌ اوت شد! عدد " + Number(correctAnswer).toLocaleString('fa-IR') + " بود.";
+        document.getElementById('message').innerHTML = "❌ اشتباه عدد " + Number(correctAnswer).toLocaleString('fa-IR') + " بود.";
         document.getElementById('message').style.color = "var(--red)";
         for(var i = 1; i <= 3; i++){ var btn = document.getElementById('opt' + i); if(btn && btn.value == correctAnswer) btn.classList.add('correct'); }
         renderStats();
