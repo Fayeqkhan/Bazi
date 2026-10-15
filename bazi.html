@@ -101,124 +101,121 @@ const $ = id => document.getElementById(id);
 const KEY = 'goldenNumberV2';
 let player = null, score = 0, round = 1, answer = null, playable = false;
 let currentOptions = [];
+const SB = 'https://sheetdb.io';
 
 function readData(){
-  try { return JSON.parse(localStorage.getItem(KEY)) || {players:{},records:[]}; }
-  catch(e){ return {players:{},records:[]}; }
+    try { return JSON.parse(localStorage.getItem(KEY)) || {players:{}}; }
+    catch(e){ return {players:{}}; }
 }
-function saveData(data){ try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e){} }
+function saveData(data){ try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(e){} }
 function fa(n){ return Number(n).toLocaleString('fa-IR'); }
+
 function showGame(name){
-  player = name;
-  $('playerName').textContent = name;
-  $('authPanel').classList.add('hidden');
-  $('gamePanel').classList.remove('hidden');
-  const d = readData();
-  score = Number(d.players[name]?.score || 0);
-  round = Number(d.players[name]?.round || 1);
-  updateStats();
-  newRound();
+    player = name;
+    $('playerName').textContent = name;
+    $('authPanel').classList.add('hidden');
+    $('gamePanel').classList.remove('hidden');
+    const d = readData();
+    score = d.players[player]?.score || 0;
+    renderStats();
+    startNewRound();
 }
-function updateStats(){
-  const d=readData(), rec=d.records.find(x=>x.name===player);
-  $('score').textContent=fa(score);
-  $('level').textContent=fa(round);
-  $('best').textContent=fa(Math.max(score, Number(rec?.score||0)));
-}
-function login(create){
-  const name=$('username').value.trim();
-  const pass=$('password').value;
-  if(!name){alert('لطفاً نام بازیکن را وارد کن.');return;}
-  if(!pass){alert('لطفاً یک رمز برای فرم وارد کن.');return;}
-  const d=readData();
-  if(create){
-    if(d.players[name]){alert('این نام در این مرورگر وجود دارد؛ وارد شو.');return;}
-    d.players[name]={score:0,round:1};
+
+function updateStats(s){
+    const d = readData();
+    if(!d.players[player]) d.players[player] = {score:0, high:0};
+    d.players[player].score = s;
+    if(s > (d.players[player].high || 0)) d.players[player].high = s;
     saveData(d);
-  } else if(!d.players[name]){
-    // Guest/local profile only; no password verification is performed.
-    d.players[name]={score:0,round:1};
-    saveData(d);
-  }
-  localStorage.setItem('goldenNumberActive',name);
-  showGame(name);
+    renderStats();
+    
+    if(SB && SB.includes('http')){
+        var today = new Date().toLocaleDateString('fa-IR');
+        var pId = "PL-" + Math.floor(100000 + Math.random() * 900000);
+        fetch(SB, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: [{"Player ID": pId, "Username": player, "Email": player+"@game.com", "Total Score": s, "Level": Math.floor(s/50)+1, "Join Date": today, "Last Played": today}] })
+        });
+    }
 }
-function saveProgress(){
-  const d=readData();
-  d.players[player]={score,round};
-  const old=d.records.find(x=>x.name===player);
-  if(old) old.score=Math.max(old.score,score);
-  else d.records.push({name:player,score});
-  d.records.sort((a,b)=>b.score-a.score);
-  d.records=d.records.slice(0,10);
-  saveData(d); updateStats();
+
+function renderStats(){
+    const d = readData();
+    $('scoreVal').textContent = fa(score);
+    $('roundVal').textContent = fa(round);
+    $('highScoreVal').textContent = fa(d.players[player]?.high || 0);
 }
-function newRound(){
-  playable=true; answer=null;
-  $('message').textContent='کدام توپ عدد طلایی را پنهان کرده است؟';
-  $('message').style.color='var(--gold)';
-  $('nextBtn').classList.add('hidden');
-  const mode=$('difficulty').value;
-  const max=mode==='easy'?20:mode==='hard'?200+round*10:100+round*5;
-  answer=1+Math.floor(Math.random()*max);
-  const spread=mode==='easy'?6:mode==='hard'?35:15;
-  const vals=new Set([answer]);
-  while(vals.size<3){
-    let v=answer+Math.floor(Math.random()*(spread*2+1))-spread;
-    if(v<1)v=1+Math.floor(Math.random()*max);
-    if(v!==answer) vals.add(v);
-  }
-  currentOptions=[...vals];
-  for(let i=0;i<3;i++){
-    const b=$('ball'+i); b.textContent=fa(currentOptions[i]); b.className='ball'; b.disabled=false;
-  }
+
+function handleLogin(){
+    const u = $('username').value.trim();
+    const p = $('password').value.trim();
+    if(!u || !p){ alert('نام و رمز را وارد کن!'); return; }
+    showGame(u);
 }
-function choose(i){
-  if(!playable)return;
-  playable=false;
-  const mode=$('difficulty').value;
-  for(let j=0;j<3;j++){
-    const b=$('ball'+j); b.disabled=true;
-    if(currentOptions[j]===answer){b.classList.add('correct');b.textContent='✓ '+fa(answer);}
-  }
-  if(currentOptions[i]===answer){
-    const points=mode==='easy'?10:mode==='hard'?25:15;
-    score+=points; round++;
-    $('message').textContent='🎉 آفرین! درست انتخاب کردی. +'+fa(points)+' امتیاز';
-    $('message').style.color='var(--gold)';
-  } else {
-    $('ball'+i).classList.add('wrong');
-    $('message').textContent='این بار نه! عدد طلایی '+fa(answer)+' بود.';
-    $('message').style.color='#fca5a5';
-  }
-  saveProgress();
-  $('nextBtn').classList.remove('hidden');
+
+function handleSignUp(){
+    handleLogin();
 }
-function setTab(tab){
-  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
-  ['play','leaderboard','help'].forEach(t=>$(t+'Tab').classList.toggle('hidden',t!==tab));
-  if(tab==='leaderboard') renderRecords();
+
+function handleLogout(){
+    localStorage.removeItem('currentActiveUser');
+    $('authPanel').classList.remove('hidden');
+    $('gamePanel').classList.add('hidden');
 }
-function renderRecords(){
-  const d=readData();
-  if(!d.records.length){$('records').innerHTML='<p class="small">هنوز رکوردی ثبت نشده است.</p>';return;}
-  const rows=d.records.map((r,i)=>`<tr><td>${fa(i+1)}</td><td>${escapeHTML(r.name)}</td><td>${fa(r.score)}</td></tr>`).join('');
-  $('records').innerHTML=`<table><thead><tr><th>رتبه</th><th>بازیکن</th><th>رکورد</th></tr></thead><tbody>${rows}</tbody></table>`;
+
+function startNewRound(){
+    canPlay = true;
+    $('message').textContent = "کدام توپ عدد طلایی را پنهان کرده است؟";
+    $('message').style.color = "var(--gold)";
+    renderStats();
+    
+    correctAnswer = Math.floor(Math.random() * 100) + 1;
+    let w1 = correctAnswer + Math.floor(Math.random() * 8) + 2;
+    let w2 = correctAnswer - Math.floor(Math.random() * 8) - 2;
+    if(w2 < 1) w2 = correctAnswer + 12;
+    
+    currentOptions = [correctAnswer, w1, w2];
+    
+    // 🔥 الگوریتم جادویی رد و بدل کردن و مخلوط کردن واقعی توپ‌ها توسط کامپیوتر
+    for (let i = currentOptions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [currentOptions[i], currentOptions[j]] = [currentOptions[j], currentOptions[i]];
+    }
+    
+    for (let i = 1; i <= 3; i++) {
+        const btn = $('opt' + i);
+        if(btn){
+            btn.textContent = fa(currentOptions[i-1]);
+            btn.value = currentOptions[i-1];
+            btn.className = "ball";
+        }
+    }
 }
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-$('loginBtn').addEventListener('click',()=>login(false));
-$('registerBtn').addEventListener('click',()=>login(true));
-$('password').addEventListener('keydown',e=>{if(e.key==='Enter')login(false);});
-for(let i=0;i<3;i++)$('ball'+i).addEventListener('click',()=>choose(i));
-$('nextBtn').addEventListener('click',newRound);
-$('resetBtn').addEventListener('click',()=>{if(confirm('امتیاز این بازی از صفر شروع شود؟')){score=0;round=1;saveProgress();newRound();}});
-$('difficulty').addEventListener('change',newRound);
-$('logoutBtn').addEventListener('click',()=>{localStorage.removeItem('goldenNumberActive');player=null;$('gamePanel').classList.add('hidden');$('authPanel').classList.remove('hidden');$('password').value='';});
-document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
-$('clearRecords').addEventListener('click',()=>{if(confirm('تمام رکوردهای محلی پاک شود؟')){const d=readData();d.records=[];saveData(d);renderRecords();updateStats();}});
-const saved=localStorage.getItem('goldenNumberActive');
-if(saved && readData().players[saved]) showGame(saved);
-})();
+
+function checkAnswer(b){
+    if(!canPlay) return;
+    canPlay = false;
+    if(b.value == correctAnswer){
+        b.classList.add('correct');
+        score += 10;
+        round += 1;
+        $('message').textContent = "🎯 گلللللل! عدد طلایی را پیدا کردی. دست بعدی!";
+        $('message').style.color = "var(--green)";
+        updateStats(score);
+    } else {
+        b.classList.add('wrong');
+        score = 0;
+        round = 1;
+        $('message').textContent = "❌ اوت شد! عدد طلایی " + fa(correctAnswer) + " بود.";
+        $('message').style.color = "var(--red)";
+        for (let i = 1; i <= 3; i++) {
+            const btn = $('opt' + i);
+            if(btn && btn.value == correctAnswer) btn.classList.add('correct');
+        }
+        updateStats(score);
+    }
+}
 </script>
 </body>
 </html>
