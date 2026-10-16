@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOLDEN NUMBER</title>
+    <title>GOLDEN NUMBER — PREMIUM EDITION</title>
     <style>
         :root {
             --gold: #ffd166;
@@ -22,7 +22,7 @@
         }
         .hidden { display: none !important; }
         
-        /* 🚪 ظاهر دقیق ورودی عکس اول شما */
+        /* 🚪 کادر شیشه‌ای فرم ورود */
         .auth-container {
             background: linear-gradient(145deg, #151f34ee, #0e1628ee);
             border: 2px solid #fbbf24; border-radius: 28px; padding: 35px 22px;
@@ -56,23 +56,27 @@
         .btn:active { transform: scale(0.98); }
         .btn-primary { background: linear-gradient(100deg, #f59e0b, #ffe08a); color: #241400; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3); }
         .btn-secondary { background: #263550; color: #fff; border: 1px solid #4b5a75; }
-        .btn-danger { background: #7f1d1d; color: #fff; border: none; }
+        .btn-danger { background: #7f1d1d; color: #fff; }
 
-        /* 🎮 ظاهر دقیق زمین بازی داخلی عکس دوم شما */
+        /* 🎮 کادر داخلی بازی فیت و پهن */
         .game-panel {
             background: linear-gradient(145deg, #151f34ee, #0e1628ee); border: 1px solid var(--line);
             border-radius: 22px; padding: 25px 20px; width: 100%; max-width: 440px; margin: 0 auto; box-shadow: 0 18px 55px #0006;
         }
         .topline { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; width: 100%; }
         .tabs { display: flex; gap: 8px; margin-bottom: 16px; width: 100%; }
-        .tab { background: #17233a; color: #dbeafe; border: 1px solid #3c4b67; border-radius: 10px; padding: 9px 13px; flex: 1; text-align: center; font-size: 13px; }
+        .tab { background: #17233a; color: #dbeafe; border: 1px solid #3c4b67; border-radius: 10px; padding: 9px 13px; flex: 1; text-align: center; font-size: 13px; cursor: pointer; }
         .tab.active { background: #fbbf24; color: #1c1917; font-weight: bold; border-color: #fbbf24; }
-        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; width: 100%; }
-        .stat { background: #0a1223; border: 1px solid #2d3b55; border-radius: 14px; padding: 13px 8px; text-align: center; color: #8290aa; font-size: 13px; }
-        .stat strong { display: block; color: var(--gold); font-size: 23px; margin-top: 6px; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0; width: 100%; }
+        .stat { background: #0a1223; border: 1px solid #2d3b55; border-radius: 14px; padding: 13px 8px; text-align: center; color: #8290aa; font-size: 12px; }
+        .stat strong { display: block; color: var(--gold); font-size: 21px; margin-top: 4px; }
         
-        /* زمین سرسبز چمنی چالش */
-        .field-area { background: linear-gradient(#123a2d, #0b251f); border: 2px solid #27634c; border-radius: 18px; padding: 25px 12px; margin: 18px 0; position: relative; width: 100%; }
+        /* ⏱️ نوار تایمر معکوس نئونی */
+        .timer-container { width: 100%; height: 6px; background: #1e293b; border-radius: 10px; margin: 10px 0; overflow: hidden; }
+        .timer-bar { width: 100%; height: 100%; background: linear-gradient(90deg, var(--red), #f87171); transition: width 0.1s linear; }
+
+        /* ⚽ زمین چمنی سرسبز عکس شما */
+        .field-area { background: linear-gradient(#123a2d, #0b251f); border: 2px solid #27634c; border-radius: 18px; padding: 25px 12px; margin: 15px 0; position: relative; width: 100%; }
         .balls { display: flex; justify-content: center; gap: 15px; width: 100%; }
         .ball {
             width: 95px; height: 95px; border-radius: 50%; border: 3px solid #fbbf24;
@@ -82,7 +86,16 @@
         .ball:hover { transform: translateY(-5px); }
         .ball.correct { background: linear-gradient(135deg, #16a34a, #064e3b); color: white; border-color: #86efac; }
         .ball.wrong { background: linear-gradient(135deg, #dc2626, #7f1d1d); color: white; border-color: #fca5a5; }
-        #message { font-weight: bold; color: var(--gold); font-size: 16px; margin: 15px 0; text-align: center; }
+        
+        /* 🎡 دیزاین گردونه شانس لوکس */
+        .wheel-container { position: relative; width: 200px; height: 200px; margin: 15px auto; border: 5px solid #fbbf24; border-radius: 50%; overflow: hidden; box-shadow: 0 0 20px #fbbf2444; transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); background: conic-gradient(#1e293b 0deg 60deg, #111827 60deg 120deg, #1d2b45 120deg 180deg, #0f172a 180deg 240deg, #1e1b4b 240deg 300deg, #311042 300deg 360deg); }
+        .wheel-pointer { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid #ef4444; z-index: 10; }
+
+        /* 🛍️ منوی شیک مغازه پوسته توپ‌ها */
+        .shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px; }
+        .shop-item { background: #0f172a; border: 1px solid var(--line); border-radius: 14px; padding: 12px; text-align: center; }
+        
+        #message { font-weight: bold; color: var(--gold); font-size: 16px; margin: 12px 0; text-align: center; }
         footer { text-align: center; color: #8290aa; font-size: 12px; margin-top: 22px; width: 100%; }
     </style>
 </head>
@@ -115,7 +128,7 @@
         <footer>GOLDEN NUMBER NETWORK © 2026</footer>
     </div>
 
-    <!-- 🎮 پنل زمین مسابقه داخلی (دقیقاً مثل عکس دوم شما) -->
+    <!-- 🎮 پنل زمین مسابقه داخلی مجهز به تب‌های گردونه و مغازه -->
     <div id="gamePanel" class="game-panel hidden">
         <div class="topline" style="background: rgba(251, 191, 36, 0.05); padding: 10px 14px; border-radius: 15px; border: 1px solid var(--line); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; width: 100%;">
             <div style="display: flex; align-items: center; gap: 10px;">
@@ -129,43 +142,173 @@
                 </div>
             </div>
         </div>
+
+        <!-- 📌 منوی جابجایی بین بخش‌های جدید بازی -->
         <div class="tabs">
-            <button class="tab active">🎮 بازی</button>
-            <button class="tab" onclick="alert('به زودی!')">🏆 رکوردها</button>
-            <button class="tab" onclick="alert('عدد درست را پیدا کن!')">ℹ️ راهنما</button>
+            <button class="tab active" id="tPlay" onclick="switchSection('play')">🎮 بازی</button>
+            <button class="tab" id="tWheel" onclick="switchSection('wheel')">🎡 گردونه شانس</button>
+            <button class="tab" id="tShop" onclick="switchSection('shop')">🛍️ مغازه پوسته</button>
         </div>
-        <div class="topline" style="margin:16px 0">
-            <div style="color:var(--gold); font-weight:bold; font-size:17px">⚽ لیگ طلایی</div>
-            <div>
-                <span>سطح: </span>
-                <select style="background:#17233a; color:white; padding:5px; border-radius:8px; border:1px solid var(--line);"><option>معمولی</option><option>متوسط</option><option>حرفه‌ای</option></select>
+
+        <!-- ⚽ بخش اصلی زمین چمن فوتبال بازی به همراه تایمر معکوس -->
+        <div id="secPlay">
+            <div class="topline" style="margin:10px 0">
+                <div style="color:var(--gold); font-weight:bold; font-size:17px">⚽ لیگ طلایی</div>
+                <div>
+                    <span>تایمر معکوس:</span>
+                </div>
+            </div>
+            <!-- ⏱️ نوار زنده بمب ساعتی ۵ ثانیه‌ای -->
+            <div class="timer-container"><div id="actionTimer" class="timer-bar"></div></div>
+            
+            <div class="stats">
+                <div class="stat">سکه طلا🪙<strong id="coinVal">0</strong></div>
+                <div class="stat">امتیاز رتبه<strong id="scoreVal">0</strong></div>
+                <div class="stat">بهترین رکورد<strong id="highScoreVal">0</strong></div>
+            </div>
+            <div class="field-area">
+                <div class="balls">
+                    <button class="ball" id="opt1" onclick="checkAnswer(this)">--</button>
+                    <button class="ball" id="opt2" onclick="checkAnswer(this)">--</button>
+                    <button class="ball" id="opt3" onclick="checkAnswer(this)">--</button>
+                </div>
+            </div>
+            <div id="message">کدام توپ عدد طلایی را پنهان کرده است؟</div>
+            <div class="actions"><button class="btn btn-primary" onclick="startNewRound()">شروع مسابقه بعدی</button></div>
+        </div>
+
+        <!-- 🎡 ویترین شیک بخش گردونه شانس روزانه -->
+        <div id="secWheel" class="hidden">
+            <h3 style="text-align:center; color:var(--gold);">🎡 چرخ شانس روزانه فضل خان</h3>
+            <div class="wheel-pointer"></div>
+            <div id="luckyWheel" class="wheel-container"></div>
+            <div id="wheelMsg" style="text-align:center; margin:10px 0; color:#86efac; font-weight:bold;">گردونه را بچرخان و تا ۵۰ سکه پاداش بگیر!</div>
+            <button class="btn btn-primary" id="spinBtn" onclick="spinTheWheel()">🎰 چرخاندن گردونه (رایگان)</button>
+        </div>
+
+        <!-- 🛍️ ویترین شیک بخش فروشگاه پوسته‌های لوکس توپ -->
+        <div id="secShop" class="hidden">
+            <h3 style="text-align:center; color:var(--gold);">🛍️ فروشگاه پوسته‌های طلایی توپ</h3>
+            <p class="small" style="text-align:center;">با سکه‌های برنده شده، ظاهر توپ‌های بازی را تغییر بده!</p>
+            <div class="shop-grid">
+                <div class="shop-item">
+                    <div style="font-size:30px; margin-bottom:5px;">⚽</div>
+                    <div style="font-size:13px; font-weight:bold;">پوسته کلاسیک</div>
+                    <button class="btn btn-primary" style="padding:5px; font-size:12px; margin-top:8px;" onclick="changeSkin('classic', 0)">فعال</button>
+                </div>
+                <div class="shop-item">
+                    <div style="font-size:30px; margin-bottom:5px;">🔥</div>
+                    <div style="font-size:13px; font-weight:bold;">توپ آتشین</div>
+                    <button class="btn btn-secondary" id="btnSkinFire" style="padding:5px; font-size:12px; margin-top:8px;" onclick="changeSkin('fire', 30)">💰 ۳۰ سکه</button>
+                </div>
+                <div class="shop-item">
+                    <div style="font-size:30px; margin-bottom:5px;">💎</div>
+                    <div style="font-size:13px; font-weight:bold;">توپ الماس طلایی</div>
+                    <button class="btn btn-secondary" id="btnSkinDiamond" style="padding:5px; font-size:12px; margin-top:8px;" onclick="changeSkin('diamond', 60)">💰 ۶۰ سکه</button>
+                </div>
+                <div class="shop-item">
+                    <div style="font-size:30px; margin-bottom:5px;">🏆</div>
+                    <div style="font-size:13px; font-weight:bold;">توپ جام جهانی</div>
+                    <button class="btn btn-secondary" id="btnSkinCup" style="padding:5px; font-size:12px; margin-top:8px;" onclick="changeSkin('cup', 100)">💰 ۱۰۰ سکه</button>
+                </div>
             </div>
         </div>
-        <div class="stats">
-            <div class="stat">امتیاز<strong id="scoreVal">0</strong></div>
-            <div class="stat">مرحله<strong id="roundVal">1</strong></div>
-            <div class="stat">بهترین رکورد<strong id="highScoreVal">0</strong></div>
-        </div>
-        <div class="field-area">
-            <div class="balls">
-                <button class="ball" id="opt1" onclick="checkAnswer(this)">--</button>
-                <button class="ball" id="opt2" onclick="checkAnswer(this)">--</button>
-                <button class="ball" id="opt3" onclick="checkAnswer(this)">--</button>
-            </div>
-        </div>
-        <div id="message">کدام توپ عدد طلایی را پنهان کرده است؟</div>
-        <div class="actions">
-            <button class="btn btn-primary" onclick="startNewRound()">شروع دوباره</button>
-        </div>
-        <footer>GOLDEN NUMBER · پایگاه داده فضل خان</footer>
+
+        <footer style="margin-top: 15px;">GOLDEN NUMBER NETWORK · پایگاه داده فضل خان</footer>
     </div>
 <script>
-var sheetDbUrl = 'https://sheetdb.io/api/v1/rw19mat8fwlww';
-var isSignUpMode = false, correctAnswer = 0, score = 0, round = 1, highScore = 0, canPlay = true, player = null, currentOptions = [];
+var sheetDbUrl =  'https://sheetdb.io/api/v1/rw19mat8fwlww';
+var isSignUpMode = false, correctAnswer = 0, score = 0, round = 1, highScore = 0, coins = 0, canPlay = true, player = null, currentOptions = [];
+var currentSkin = 'classic', purchasedSkins = ['classic'];
+var timerInterval = null, timeLeft = 50; 
 
+function playSound(type) {
+    try {
+        var ctx = new (window.AudioContext || window.webkitAudioContext)();
+        var osc = ctx.createOscillator(), gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        if (type === 'goal') {
+            osc.frequency.setValueAtTime(350, ctx.currentTime); osc.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.4);
+            gain.gain.setValueAtTime(0.3, ctx.currentTime); gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.4);
+            osc.start(); osc.stop(ctx.currentTime + 0.4);
+        } else if (type === 'miss') {
+            osc.frequency.setValueAtTime(220, ctx.currentTime); osc.frequency.linearRampToValueAtTime(110, ctx.currentTime + 0.3);
+            gain.gain.setValueAtTime(0.3, ctx.currentTime); gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
+            osc.start(); osc.stop(ctx.currentTime + 0.3);
+        } else if (type === 'tick') {
+            osc.frequency.setValueAtTime(800, ctx.currentTime); gain.gain.setValueAtTime(0.05, ctx.currentTime);
+            osc.start(); osc.stop(ctx.currentTime + 0.05);
+        }
+    } catch(e) { console.log("Audio Error"); }
+}
+function switchSection(sec) {
+    document.getElementById('secPlay').classList.add('hidden');
+    document.getElementById('secWheel').classList.add('hidden');
+    document.getElementById('secShop').classList.add('hidden');
+    document.getElementById('tPlay').classList.remove('active');
+    document.getElementById('tWheel').classList.remove('active');
+    document.getElementById('tShop').classList.remove('active');
+    if(sec === 'play') { document.getElementById('secPlay').classList.remove('hidden'); document.getElementById('tPlay').classList.add('active'); startTimer(); }
+    else if(sec === 'wheel') { document.getElementById('secWheel').classList.remove('hidden'); document.getElementById('tWheel').classList.add('active'); clearInterval(timerInterval); }
+    else if(sec === 'shop') { document.getElementById('secShop').classList.remove('hidden'); document.getElementById('tShop').classList.add('active'); clearInterval(timerInterval); }
+}
+
+function startTimer() {
+    clearInterval(timerInterval);
+    if (!canPlay || document.getElementById('secPlay').classList.contains('hidden')) return;
+    timeLeft = 50; 
+    document.getElementById('actionTimer').style.width = '100%';
+    document.getElementById('actionTimer').style.background = 'linear-gradient(90deg, var(--green), #4ade80)';
+    timerInterval = setInterval(function() {
+        timeLeft--;
+        document.getElementById('actionTimer').style.width = (timeLeft * 2) + '%';
+        if (timeLeft <= 20) {
+            document.getElementById('actionTimer').style.background = 'linear-gradient(90deg, var(--red), #f87171)';
+            playSound('tick');
+        }
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            canPlay = false; playSound('miss');
+            var f = score; score = 0; round = 1;
+            document.getElementById('message').innerHTML = "⏳ زمان تمام شد! شوت شما اوت شد.";
+            document.getElementById('message').style.color = "var(--red)";
+            renderStats(); sendScore(f);
+        }
+    }, 100);
+}
+function spinTheWheel() {
+    var btn = document.getElementById('spinBtn');
+    btn.disabled = true; btn.innerHTML = "🎰 در حال چرخیدن گردونه...";
+    var deg = Math.floor(2000 + Math.random() * 2000);
+    document.getElementById('luckyWheel').style.transform = "rotate(" + deg + "deg)";
+    setTimeout(function() {
+        var win = Math.floor(Math.random() * 45) + 5;
+        coins += win;
+        document.getElementById('wheelMsg').innerHTML = "🎉 تبریک فضل خان! شما " + win + " سکه طلا برنده شدید!";
+        renderStats();
+        btn.innerHTML = "🎰 چرخاندن گردونه (رایگان)"; btn.disabled = false;
+        sendScore(score);
+    }, 4000);
+}
+
+function changeSkin(skin, cost) {
+    if (purchasedSkins.includes(skin)) {
+        currentSkin = skin;
+        alert("پوسته توپ با موفقیت روی حالت " + skin + " تنظیم شد.");
+        startNewRound(); return;
+    }
+    if (coins >= cost) {
+        coins -= cost; purchasedSkins.push(skin); currentSkin = skin;
+        if(skin==='fire') document.getElementById('btnSkinFire').innerHTML="فعال";
+        if(skin==='diamond') document.getElementById('btnSkinDiamond').innerHTML="فعال";
+        if(skin==='cup') document.getElementById('btnSkinCup').innerHTML="فعال";
+        alert("🎉 پوسته لوکس جدید با موفقیت خریداری و فعال شد!");
+        renderStats(); startNewRound(); sendScore(score);
+    } else { alert("❌ سکه طلای شما کافی نیست! در مسابقات سکه جمع کنید."); }
+}
 function toggleAuthMode() {
-    isSignUpMode = !isSignUpMode;
     var t = document.getElementById('authTitle'), n = document.getElementById('authNotice'), e = document.getElementById('email'), m = document.getElementById('mainBtn'), s = document.getElementById('switchBtn');
+    isSignUpMode = !isSignUpMode;
     if (isSignUpMode) {
         t.innerHTML = "ثبت‌نام بازیکن جدید"; n.innerHTML = "ایمیل خود را وارد کنید تا حساب آنلاین شما فعال شود.";
         e.classList.remove('hidden'); m.innerHTML = "ایجاد حساب و عضویت واقعی"; s.innerHTML = "قبلاً ثبت‌نام کرده‌ام؟ ورود";
@@ -185,16 +328,12 @@ function handleSubmit() {
         var acc = { player_id: pId, username: u, email: e, password: p, total_score: 0, level: 1, join_date: today, last_played: today };
         localStorage.setItem("user_" + u, JSON.stringify(acc));
         if (sheetDbUrl.includes('http')) {
-            fetch(sheetDbUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ data: [acc] })
-            });
+            fetch(sheetDbUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ data: [acc] }) });
         }
         alert("🎉 حساب واقعی ایجاد شد! حالا وارد شوید."); toggleAuthMode();
     } else {
         var sData = localStorage.getItem("user_" + u);
-        if (!sData) { alert("❌ نام کاربری یافت نشد! ابتدا ثبت‌نام کنید."); return; }
+        if (!sData) { alert("❌ نام کاربری یافت نشد!"); return; }
         var d = JSON.parse(sData);
         if (d.password !== p) { alert("❌ رمز اشتباه است!"); return; }
         localStorage.setItem("currentActiveUser", u); showGame(u);
@@ -205,9 +344,10 @@ function showGame(name) {
     player = name; document.getElementById('welcomeMsg').innerHTML = "سلام، " + name + " 👋";
     document.getElementById('authPanel').classList.add('hidden'); document.getElementById('gamePanel').classList.remove('hidden');
     var h = localStorage.getItem("high_" + player); highScore = h ? parseInt(h) : 0;
-    score = 0; round = 1; renderStats(); startNewRound();
+    score = 0; round = 1; coins = 10; renderStats(); startNewRound();
 }
 
+// 🔥 تصحیح و شلیک مستقیم متغیر سکه‌ها و امتیازها به ستون‌های جدول شما
 function sendScore(s) {
     if (!sheetDbUrl || !sheetDbUrl.includes('http')) return;
     var today = new Date().toLocaleDateString('fa-IR');
@@ -223,17 +363,22 @@ function renderStats() {
     document.getElementById('scoreVal').innerHTML = Number(score).toLocaleString('fa-IR');
     document.getElementById('roundVal').innerHTML = Number(round).toLocaleString('fa-IR');
     document.getElementById('highScoreVal').innerHTML = Number(highScore).toLocaleString('fa-IR');
+    document.getElementById('coinVal').innerHTML = Number(coins).toLocaleString('fa-IR');
 }
 
 function handleLogout() {
-    localStorage.removeItem('currentActiveUser');
+    clearInterval(timerInterval); localStorage.removeItem('currentActiveUser');
     document.getElementById('authPanel').classList.remove('hidden'); document.getElementById('gamePanel').classList.add('hidden');
 }
 
 function startNewRound() {
     canPlay = true; document.getElementById('message').innerHTML = "کدام توپ عدد طلایی را پنهان کرده است؟";
     document.getElementById('message').style.color = "var(--gold)";
-    for (let i = 1; i <= 3; i++) { var btn = document.getElementById('opt' + i); if (btn) btn.className = "ball"; }
+    var ballEmoji = '⚽';
+    if(currentSkin === 'fire') ballEmoji = '🔥';
+    if(currentSkin === 'diamond') ballEmoji = '💎';
+    if(currentSkin === 'cup') ballEmoji = '🏆';
+    for (let i = 1; i <= 3; i++) { var btn = document.getElementById('opt' + i); if (btn) { btn.className = "ball"; btn.style.fontSize = "26px"; } }
     correctAnswer = Math.floor(Math.random() * 100) + 1;
     var w1 = correctAnswer + Math.floor(Math.random() * 8) + 2, w2 = correctAnswer - Math.floor(Math.random() * 8) - 2;
     if (w2 < 1) w2 = correctAnswer + 12; currentOptions = [correctAnswer, w1, w2];
@@ -243,21 +388,23 @@ function startNewRound() {
     }
     for (let i = 1; i <= 3; i++) {
         var btn = document.getElementById('opt' + i);
-        if (btn) { btn.innerHTML = Number(currentOptions[i - 1]).toLocaleString('fa-IR'); btn.value = currentOptions[i - 1]; }
+        if (btn) { btn.innerHTML = ballEmoji + "<br><span style='font-size:16px;color:#fff;'>" + Number(currentOptions[i - 1]).toLocaleString('fa-IR') + "</span>"; btn.value = currentOptions[i - 1]; }
     }
+    startTimer();
 }
 
 function checkAnswer(b) {
-    if (!canPlay) return; canPlay = false;
+    if (!canPlay) return; canPlay = false; clearInterval(timerInterval);
     if (b.value == correctAnswer) {
-        b.classList.add('correct'); score += 10; round += 1;
+        b.classList.add('correct'); score += 10; round += 1; coins += 5;
         if (score > highScore) { highScore = score; localStorage.setItem("high_" + player, highScore); }
         document.getElementById('message').innerHTML = "🎯 گلللللل! دست بعدی!"; document.getElementById('message').style.color = "var(--green)";
-        renderStats(); sendScore(score);
+        playSound('goal'); renderStats(); sendScore(score);
     } else {
         b.classList.add('wrong'); var f = score; score = 0; round = 1;
         document.getElementById('message').innerHTML = "❌ اوت شد! عدد " + Number(correctAnswer).toLocaleString('fa-IR') + " بود.";
         document.getElementById('message').style.color = "var(--red)";
+        playSound('miss');
         for (let i = 1; i <= 3; i++) { var btn = document.getElementById('opt' + i); if (btn && btn.value == correctAnswer) btn.classList.add('correct'); }
         renderStats(); sendScore(f);
     }
